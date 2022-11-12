@@ -2,6 +2,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import logo from "../assets/lootie.svg";
+import Image from "next/image";
 import signupSchema from "../formSchemas/signupSchema";
 const Signup = () => {
   const [iserror, setIserror] = useState(false);
@@ -44,52 +46,72 @@ const Signup = () => {
 
   return (
     <>
-      <div className="signup flex  justify-center items-center bg-transparent">
-        <div className="p-2 border-slate-200 rounded-md flex flex-col items-center space-y-3">
-          <span className="ml-3 font-black text-3xl"> Sign Up</span>
+      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="sm:mt-0 mt-16 mx-auto max-w-lg">
           <form
-            className="border-slate-200 rounded-md flex flex-col items-center space-y-3"
+            class="mt-6 sm:gap-0 grid gap-3  mb-0 space-y-4 rounded-lg p-8 sm:shadow-2xl"
             onSubmit={handleSubmit}
           >
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="Name">Name</label>
-              <input
-                className="p-3 border-[1px] border-slate-500 rounded-sm w-80"
-                placeholder="Name"
-                value={values.name}
-                onChange={handleChange}
-                name="name"
-                autoComplete="on"
+            <div className="flex text-center w-full flex-col">
+              <Image
+                alt="logo"
+                className="animate-bounce self-center"
+                src={logo}
+                width="80"
               />
-              {errors.name && touched.name ? (
-                <p color="error">{errors.name}</p>
-              ) : null}
+              <p class="text-2xl font-medium">Sign Up</p>
             </div>
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="email">Email</label>
+            <div>
+              <label for="email" class="text-sm font-medium">
+                Name
+              </label>
+              <div class="relative mt-1">
+                <input
+                  type="text"
+                  class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  placeholder="Name"
+                  value={values.name}
+                  onChange={handleChange}
+                  name="name"
+                  autoComplete="on"
+                />
+                {errors.name && touched.name ? (
+                  <p color="error">{errors.name}</p>
+                ) : null}
+              </div>
+            </div>
+
+            <div>
+              <label for="email" class="text-sm font-medium">
+                Email
+              </label>
               <input
-                className="p-3 border-[1px] border-slate-500 rounded-sm w-80"
+                class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                 placeholder="E-Mail"
                 value={values.email}
                 onChange={handleChange}
                 name="email"
+                type={"email"}
                 autoComplete="on"
               />
               {errors.email && touched.email ? (
                 <p color="error">{errors.email}</p>
               ) : null}
             </div>
-
-            <div className="flex flex-col space-y-1">
-              <label htmlFor="Password">Password</label>
+            <div>
+              <label for="password" class="text-sm font-medium">
+                Password
+              </label>
               <input
-                className="p-3 border-[1px] border-slate-500 rounded-sm w-80"
+                class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
                 name="password"
                 autoComplete="on"
+                type={"password"}
               />
+
               {errors.password && touched.password ? (
                 <p color="error">{errors.password}</p>
               ) : null}
@@ -99,35 +121,24 @@ const Signup = () => {
             )}
 
             {isloading ? (
-              <button
-                className="animate-pulse w-full bg-[#4D5DFA]  rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]"
-                disabled
-              >
+              <button class="cursor-progress animate-pulse block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white">
                 Processing...
               </button>
             ) : (
               <button
                 type="submit"
-                className="w-full bg-[#4D5DFA] rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]"
+                class="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
               >
                 Sign Up
               </button>
             )}
+            <p class="text-center text-sm text-gray-500">
+              Already have an account?
+              <Link class="underline" href="/login">
+                Login
+              </Link>
+            </p>
           </form>
-
-          <div className="flex flex-col space-y-5 w-full">
-            <div className="flex items-center justify-center border-t-[1px] border-t-slate-300 w-full relative">
-              <div className="-m4-1 font-bod bg-transparent px-5 absolute">
-                Or
-              </div>
-            </div>
-            <Link
-              href={"/login"}
-              className="w-full border-blue-900 hover:border-[#003087] hover:border-[2px] border-[1px] rounded-3xl p-3 text-[#4D5DFA] font-bold transition duration-200"
-            >
-              Back to login
-            </Link>
-          </div>
         </div>
       </div>
     </>
