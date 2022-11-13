@@ -51,7 +51,7 @@ const Verify = () => {
           >
             <Image alt="logo" className="animate-bounce" src={logo} width="80" />
             <div className="flex flex-col space-y-1">
-              <label htmlFor="password">
+              <label htmlhtmlFor="password">
                 Please enter your verification code
               </label>
               <input

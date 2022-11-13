@@ -43,29 +43,29 @@ const Login = () => {
   };
   return (
     <>
-      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="sm:mt-0 mt-16 mx-auto max-w-lg">
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="sm:mt-0 mb-24 mx-auto max-w-lg">
           <form
-            class="sm:mt-0 sm:gap-0 grid gap-3 mt-16 mb-0 space-y-4 rounded-lg p-8 sm:shadow-2xl"
+            className="sm:mt-0 sm:gap-0 grid gap-3 mt-16 mb-0 space-y-4 rounded-lg p-8 "
             onSubmit={handleSubmit}
           >
             <div className="flex text-center w-full flex-col">
-              <Image
+            <Image
                 alt="logo"
                 className="animate-bounce self-center"
                 src={logo}
                 width="80"
               />
-              <p class="text-2xl font-medium">Sign in to your account</p>
+              <p className="text-2xl font-medium">Sign in to your account</p>
             </div>
             <div>
-              <label for="email" class="text-sm font-medium">
+              <label htmlFor="email" className="text-sm font-medium">
                 Email
               </label>
-              <div class="relative mt-1">
+              <div className="relative mt-1">
                 <input
                   type="email"
-                  class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                   placeholder="E-Mail"
                   value={values.email}
                   onChange={handleChange}
@@ -80,13 +80,13 @@ const Login = () => {
             </div>
 
             <div>
-              <label for="password" class="text-sm font-medium">
+              <label htmlFor="password" className="text-sm font-medium">
                 Password
               </label>
 
-              <div class="relative mt-1">
+              <div className="relative mt-1">
                 <input
-                  class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                   placeholder="Password"
                   value={values.password}
                   onChange={handleChange}
@@ -114,15 +114,15 @@ const Login = () => {
             ) : (
               <button
                 type="submit"
-                class="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
               >
                 Log in
               </button>
             )}
 
-            <p class="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-gray-500">
               No account?
-              <Link class="underline" href="signup">
+              <Link className="underline" href="signup">
                 Sign up
               </Link>
             </p>
