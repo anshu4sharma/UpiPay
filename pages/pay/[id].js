@@ -58,27 +58,17 @@ const Pay = ({ link }) => {
 
 export default Pay;
 
-//  this is required for dynamic routes 
-//  getstatic props will only work here if getstaticpath is working
-export async function getStaticPaths() {
-  const res = await fetch('https://anshu.up.railway.app/genlink/showall')
-  const links = await res.json()
-  const paths = links.map((items) => {
-    return {
-      params: { id: items.uid }
-    }
-  })
-
-  return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  }
-}
-
-export async function getStaticProps({ params }) {
-
-  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${params.id}`)
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${context.params.id}`)
   const link = await res.json()
+  if (link.length < 1) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/404"
+      }
+    }
+  }
   return {
     props: { link },
   }
