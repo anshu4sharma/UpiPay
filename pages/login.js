@@ -5,7 +5,10 @@ import axios from "axios";
 import loginSchema from "../formSchemas/loginSchema";
 import logo from "../assets/lootie.svg";
 import Image from "next/image";
+import { useContext } from "react";
+import MerchantContext from "../context/MerchantContext";
 const Login = () => {
+  const user = useContext(MerchantContext);
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const [isEmailVerified, setisEmailVerified] = useState(false);
@@ -27,18 +30,16 @@ const Login = () => {
         url: "https://anshu.up.railway.app/users/login",
         headers: { "Content-Type": "application/json" },
         data: { email: values.email, password: values.password },
+        withCredentials: true, // Don't forget to specify this if you need cookies
       });
       if (data.status == 200) {
         localStorage.setItem("authtoken", data.data.authToken);
         localStorage.setItem("IsLoggedin", true);
       }
     } catch (error) {
+      setIserror(true);
+    } finally {
       setIsloading(false);
-      if (error.response.status === 401) {
-        setisEmailVerified(true);
-      } else {
-        setIserror(true);
-      }
     }
   };
   return (
@@ -50,13 +51,11 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex text-center w-full flex-col">
-            <Image
-                alt="logo"
-                className="animate-bounce self-center"
-                src={logo}
-                width="80"
-              />
-              <p className="text-2xl font-medium">Sign in to your account</p>
+              <div className="text-4xl mb-4 font-semibold" >
+                Upi<span className="text-[#00b9f5]">Pay</span>
+              </div>
+
+              <p className="text-xl font-medium">Sign in to your account</p>
             </div>
             <div>
               <label htmlFor="email" className="text-sm font-medium">
@@ -65,28 +64,25 @@ const Login = () => {
               <div className="relative mt-1">
                 <input
                   type="email"
-                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
                   placeholder="E-Mail"
                   value={values.email}
                   onChange={handleChange}
                   name="email"
                   autoComplete="on"
                 />
-
                 {errors.email && touched.email ? (
                   <p className="text-red-900">{errors.email}</p>
                 ) : null}
               </div>
             </div>
-
             <div>
               <label htmlFor="password" className="text-sm font-medium">
                 Password
               </label>
-
               <div className="relative mt-1">
                 <input
-                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
                   placeholder="Password"
                   value={values.password}
                   onChange={handleChange}
@@ -94,7 +90,6 @@ const Login = () => {
                   type="password"
                   autoComplete="on"
                 />
-
                 {errors.password && touched.password ? (
                   <p className="text-red-900">{errors.password}</p>
                 ) : null}
@@ -108,21 +103,21 @@ const Login = () => {
             )}
 
             {isloading ? (
-              <button className="cursor-progress animate-pulse w-full bg-teal-600 rounded-3xl p-2 text-white font-bold transition duration-200 hover:bg-[#003087]">
+              <button className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white transition">
                 Processing...
               </button>
             ) : (
               <button
                 type="submit"
-                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white"
               >
                 Log in
               </button>
             )}
 
             <p className="text-center text-sm text-gray-500">
-              No account?
-              <Link className="underline" href="signup">
+              No account? {""}
+              <Link className="underline" href="/signup">
                 Sign up
               </Link>
             </p>

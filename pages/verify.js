@@ -3,17 +3,18 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import loginSchema from "../formSchemas/loginSchema";
-import logo from '../assets/lootie.svg'
+import otpSchema from "../formSchemas/otpSchema";
+import logo from "../assets/lootie.svg";
+import { useRouter } from "next/router";
 const Verify = () => {
+  const router = useRouter();
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
-  const [isEmailVerified, setisEmailVerified] = useState(false);
   const { handleSubmit, values, handleChange, touched, errors } = useFormik({
     initialValues: {
       otp: "",
     },
-    validationSchema: loginSchema,
+    validationSchema: otpSchema,
     onSubmit: () => {
       fetchData();
     },
@@ -23,62 +24,83 @@ const Verify = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "https://anshu.up.railway.app/users/login",
+        url: "https://anshu.up.railway.app/users/verify",
         headers: { "Content-Type": "application/json" },
-        data: { email: values.email, password: values.password },
+        data: { email: router.query.email, otp: values.otp },
       });
       if (data.status == 200) {
-        localStorage.setItem("authtoken", data.data.authToken);
-        localStorage.setItem("IsLoggedin", true);
+        console.log("succes");
       }
     } catch (error) {
       setIsloading(false);
-      if (error.response.status === 401) {
-        setisEmailVerified(true);
-      } else {
         setIserror(true);
-      }
     }
   };
   return (
     <>
-      <div className="flex justify-center items-center bg-transparent">
-        <div className="p-2  border-slate-200 rounded-md flex flex-col items-center space-y-3">
-          <span className="ml-3 font-black text-3xl"> </span>
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="sm:mt-0 mb-24 mx-auto max-w-lg">
           <form
-            className="border-slate-200 rounded-md flex flex-col items-center space-y-3"
+            className="sm:mt-0 sm:gap-0 grid gap-3 mt-16 mb-0 space-y-4 rounded-lg p-8 "
             onSubmit={handleSubmit}
           >
-            <Image alt="logo" className="animate-bounce" src={logo} width="80" />
-            <div className="flex flex-col space-y-1">
-              <label htmlhtmlFor="password">
-                Please enter your verification code
-              </label>
-              <input
-                className="p-3 border-[1px] border-slate-500 rounded-sm w-80"
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-                name="password"
-                autoComplete="on"
+            <div className="flex text-center w-full flex-col">
+              <Image
+                alt="logo"
+                className="animate-bounce self-center"
+                src={logo}
+                width="80"
               />
-              {errors.otp && touched.otp ? (
-                <p className="text-red-900">{errors.otp}</p>
-              ) : null}
+              <p className="text-2xl font-medium">Sign in to your account</p>
             </div>
+            <div>
+              <label htmlFor="email" className="text-sm font-medium">
+                Email
+              </label>
+              <div className="relative mt-1">
+                <input
+                  type="email"
+                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  value={router.query.email}
+                  name="email"
+                  disabled
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="password" className="text-sm font-medium">
+                Otp
+              </label>
+              <div className="relative mt-1">
+                <input
+                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  placeholder="Otp"
+                  value={values.otp}
+                  onChange={handleChange}
+                  name="otp"
+                  type="number"
+                  autoComplete="on"
+                />
 
-            {iserror && <p className="text-red-900">Invalid otp</p>}
+                {errors.otp && touched.otp ? (
+                  <p className="text-red-900">{errors.otp}</p>
+                ) : null}
+              </div>
+            </div>
+            {iserror && (
+              <p className="text-red-900">Please enter valid Otp</p>
+            )}
 
             {isloading ? (
-              <button className="cursor-progress animate-pulse w-full bg-[#4D5DFA] rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]">
+              <button className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition">
                 Processing...
               </button>
             ) : (
               <button
                 type="submit"
-                className="w-full bg-[#4D5DFA] rounded-3xl p-3 text-white font-bold transition duration-200 hover:bg-[#003087]"
+                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
               >
-                Submit
+                Verify
               </button>
             )}
           </form>

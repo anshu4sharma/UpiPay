@@ -5,69 +5,57 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <nav className="w-full z-10">
+      <nav className="w-full z-10 relative ">
         <div className="w-full">
-          <div className="flex items-center h-20 w-full">
-            <div className="flex items-center  mx-6  justify-between w-full">
+          <div className="flex items-center h-16 w-full">
+            <div className="flex items-center mx-4 justify-between w-full">
               <div className="flex justify-center items-center flex-shrink-0 ">
-                <h1 className=" font-bold text-xl cursor-pointer">
-                  <Link href={"/"}>
-                    Upi<span className="text-teal-500">Pay</span>
-                  </Link>
-                </h1>
+                <Link className="text-2xl font-semibold" href={"/"}>
+                  Upi<span className="text-[#00b9f5]">Pay</span>
+                </Link>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <Link
-                    activeClass="Home"
                     href="/"
-                    smooth={true}
                     offset={50}
                     duration={500}
-                    className="cursor-pointer text-teal-600 font-semibold px-3 py-2 text-md hover:font-black"
+                    className={`cursor-pointer hover:bg-[#00b9f5] hover:text-white rounded-md  text-sm font-medium text-black px-3 py-2 text-md hover:font-black`}
                   >
                     Home
                   </Link>
                   <Link
-                    activeClass="about"
-                    href="/"
-                    smooth={true}
+                    href="/dashboard"
                     offset={50}
                     duration={500}
-                    className="cursor-pointer hover:bg-teal-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    About
+                    Dashboard
                   </Link>
-
                   <Link
-                    activeClass="Services"
                     href="/signup"
-                    smooth={true}
                     offset={50}
                     duration={500}
-                    className="cursor-pointer hover:bg-teal-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Signup
                   </Link>
-
                   <Link
-                    activeClass="contact"
                     href="/login"
-                    smooth={true}
                     offset={50}
                     duration={500}
-                    className="cursor-pointer bg-teal-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-black"
+                    className="cursor-pointer bg-[#00b9f5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
                   >
                     Login
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="mr-6 flex md:hidden ">
+            <div className="flex md:hidden ">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="bg-teal-600 inline-flex items-center justify-center p-2 rounded-md text-white  hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-white"
+                className="bg-[#00b9f5] inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white-800 focus:ring-white"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -119,51 +107,43 @@ function Navbar() {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
-              <div
-                ref={ref}
-                className="bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3"
-              >
+          {() => (
+            <div
+              className="md:hidden fixed w-full max-h-full z-50"
+              id="mobile-menu"
+            >
+              <div className="bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link
                   href="/"
-                  activeClass="home"
-                  smooth={true}
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-teal-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Home
                 </Link>
                 <Link
-                  href="/genlink"
-                  activeClass="about"
-                  smooth={true}
+                  href="/dashboard"
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-teal-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Crate Payment Link
+                  Dashboard
                 </Link>
 
                 <Link
                   href="/signup"
-                  activeClass="services"
-                  smooth={true}
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-teal-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Signup
                 </Link>
 
                 <Link
-                  href="/contact"
-                  activeClass="work"
-                  smooth={true}
+                  href="/login"
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-teal-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Login
                 </Link>

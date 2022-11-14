@@ -1,102 +1,150 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-const index = () => {
+import banner from "../assets/banner.webp";
+import zerocharge from "../assets/zero.svg";
+import collectPayments from "../assets/collectPayments.webp";
+const Home = () => {
   return (
     <>
-      <section className="text-gray-600 body-font relative">
-        <div className="container px-5 py-8 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
-            <iframe
-              width="100%"
-              height="100%"
-              className="absolute inset-0"
-              frameborder="0"
-              title="map"
-              marginheight="0"
-              marginwidth="0"
-              scrolling="no"
-              src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-            ></iframe>
-            <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
-              <div className="lg:w-1/2 px-6">
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
-                  ADDRESS
+      <section className="text-gray-600 body-font">
+        <div className="container mx-auto flex px-10 py-4 md:flex-row flex-col items-center">
+          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 className="inline-block title-font clear-both mt-0 mb-8 py-1 px-4 text-center bg-[#e6f7ff] rounded-xl">
+              Upi Pay Payment Links
+            </h1>
+            <h1 className=" font-extrabold title-font sm:text-5xl text-3xl mb-4  text-gray-900">
+              Collect Online Payments from anywhere in India.
+            </h1>
+            <h1 className=" font-extrabold leading-10 title-font sm:text-5xl text-3xl mb-4  text-[#00b9f5]">
+              No Coding Required.
+            </h1>
+            <Link
+              href="/dashboard"
+              className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
+            >
+              Get Payment Link
+            </Link>
+            <div className="flex leading-10  w-full md:justify-start justify-center items-end"></div>
+            <div className="flex lg:flex-row md:flex-col"></div>
+          </div>
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 ">
+            <Image
+              className="object-cover object-center rounded"
+              alt="hero"
+              src={banner}
+            />
+          </div>
+        </div>
+      </section>
+      {/*  Collect Online Payments end here */}
+
+      <section className="text-gray-600 body-font text-center">
+        <h1 className="font-bold text-4xl text-black leading-10 my-4">
+          Collect Payments in 3 Easy Steps
+        </h1>
+        <div className="container mx-auto gap-16 sm:gap-32 flex px-10 py-8 md:flex-row flex-col items-center">
+          <div className="lg:max-w-lg lg:w-full md:w-1/2">
+            <Image
+              className="object-cover object-center rounded"
+              alt="hero"
+              src={collectPayments}
+            />
+          </div>
+          <div className="lg:flex-grow flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div className="flex relative pb-12">
+              <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                  STEP 1
                 </h2>
-                <p className="mt-1">
-                  Photo booth tattooed prism, portland taiyaki hoodie neutra
-                  typewriter
+                <p className="leading-relaxed">
+                  Create Payment Link Via Upi Pay Dashboard
                 </p>
               </div>
-              <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
-                  EMAIL
+            </div>
+            <div className="flex relative pb-12">
+              <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                  STEP 2
                 </h2>
-                <a className="text-indigo-500 leading-relaxed">
-                  example@email.com
-                </a>
-                <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
-                  PHONE
+                <p className="leading-relaxed">
+                  Share Payment Link Through SMS, Email or WhatsApp
+                </p>
+              </div>
+            </div>
+            <div className="flex relative pb-12">
+              <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
+                <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
+              </div>
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="5" r="3"></circle>
+                  <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
+                </svg>
+              </div>
+              <div className="flex-grow pl-4">
+                <h2 className="font-medium title-font text-sm text-gray-900 mb-1 tracking-wider">
+                  STEP 3
                 </h2>
-                <p className="leading-relaxed">123-456-7890</p>
+                <p className="leading-relaxed">
+                  Customer Makes Payment Using Preferred Payment Method
+                </p>
               </div>
             </div>
           </div>
-          <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-            <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
-              Feedback
-            </h2>
-            <p className="leading-relaxed mb-5 text-gray-600">
-              Post-ironic portland shabby chic echo park, banjo fashion axe
-            </p>
-            <div className="relative mb-4">
-              <label for="name" className="leading-7 text-sm text-gray-600">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label for="email" className="leading-7 text-sm text-gray-600">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label for="email" className="leading-7 text-sm text-gray-600">
-                Upi Id
-              </label>
-              <input
-                type="text"
-                id="upiId"
-                name="upiId"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label for="message" className="leading-7 text-sm text-gray-600">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-              ></textarea>
-            </div>
-            <button type="submit" className="text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Generate Link
-            </button>
-            <p className="text-xs text-gray-500 mt-3">
-              Chicharrones blog helvetica normcore iceland tousled brook viral
-              artisan.
-            </p>
+        </div>
+      </section>
+
+      <section className="text-gray-600 body-font text-center">
+        <div className="flex justify-center items-center sm:max-w-6xl gap-16 flex-col rounded-3xl mx-auto mt-0  py-20 text-center bg-[#f2fbff]">
+          <div className="font-bold flex flex-col text-2xl sm:text-4xl text-center text-black ">
+            No Setup Fees, No Maintenance Charges
+            <span className="font-bold text-2xl sm:text-4xl text-center text-black ">
+              Grow Your Profits
+            </span>
+          </div>
+          <div>
+            <Image src={zerocharge} alt="zero charges" />
           </div>
         </div>
       </section>
@@ -104,4 +152,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;

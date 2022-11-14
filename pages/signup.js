@@ -5,7 +5,9 @@ import axios from "axios";
 import logo from "../assets/lootie.svg";
 import Image from "next/image";
 import signupSchema from "../formSchemas/signupSchema";
+import { useRouter } from "next/router";
 const Signup = () => {
+  const router = useRouter();
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const { handleSubmit, values, handleChange, touched, errors } = useFormik({
@@ -33,17 +35,14 @@ const Signup = () => {
         },
       });
       if (data.status === 200) {
-        localStorage.setItem("name", values.name);
-        // setIsloading(false);
-        // navigate("/verify", { state: { email: values.email } });
+        router.push({ pathname: "/verify", query: { email: values.email } });
       }
-      console.log(data);
     } catch (error) {
       setIserror(true);
+    } finally {
       setIsloading(false);
     }
   };
-
   return (
     <>
       <div className="mx-auto sm:mt-0 mb-16 max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -53,13 +52,10 @@ const Signup = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex text-center w-full flex-col">
-              <Image
-                alt="logo"
-                className="animate-bounce self-center"
-                src={logo}
-                width="80"
-              />
-              <p className="text-2xl font-medium">Sign Up</p>
+              <div className="text-4xl mb-4 font-semibold">
+                Upi<span className="text-[#00b9f5]">Pay</span>
+              </div>
+              <p className="text-xl font-medium">Sign Up</p>
             </div>
             <div>
               <label htmlFor="email" className="text-sm font-medium">
@@ -68,7 +64,7 @@ const Signup = () => {
               <div className="relative mt-1">
                 <input
                   type="text"
-                  className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
                   placeholder="Name"
                   value={values.name}
                   onChange={handleChange}
@@ -76,17 +72,16 @@ const Signup = () => {
                   autoComplete="on"
                 />
                 {errors.name && touched.name ? (
-                  <p color="error">{errors.name}</p>
+                  <p className="text-red-900">{errors.name}</p>
                 ) : null}
               </div>
             </div>
-
             <div>
               <label htmlFor="email" className="text-sm font-medium">
                 Email
               </label>
               <input
-                className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
                 placeholder="E-Mail"
                 value={values.email}
                 onChange={handleChange}
@@ -95,7 +90,7 @@ const Signup = () => {
                 autoComplete="on"
               />
               {errors.email && touched.email ? (
-                <p color="error">{errors.email}</p>
+                <p className="text-red-900">{errors.email}</p>
               ) : null}
             </div>
             <div>
@@ -103,7 +98,7 @@ const Signup = () => {
                 Password
               </label>
               <input
-                className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
+                className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
@@ -111,23 +106,23 @@ const Signup = () => {
                 autoComplete="on"
                 type={"password"}
               />
-
               {errors.password && touched.password ? (
-                <p color="error">{errors.password}</p>
+                <p className="text-red-900">{errors.password}</p>
               ) : null}
             </div>
             {iserror && (
-              <p color="error">User with email id already exists !</p>
+              <p className="text-red-900">
+                User with email id already exists !
+              </p>
             )}
-
             {isloading ? (
-              <button className="cursor-progress animate-pulse block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white">
+              <button className="cursor-progress block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white">
                 Processing...
               </button>
             ) : (
               <button
                 type="submit"
-                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white"
               >
                 Sign Up
               </button>
