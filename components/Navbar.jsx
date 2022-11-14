@@ -7,12 +7,12 @@ function Navbar() {
   useLayoutEffect(() => {
     let isLoggedIn = localStorage.getItem('login')
     if (isLoggedIn) {
-      setShowLink(!Showlink)
+      setShowLink(false)
     }
     else {
-      setShowLink(!Showlink)
+      setShowLink(true)
     }
-  }, [Showlink])
+  }, [])
   return (
     <div>
       <nav className="w-full z-10 relative ">
