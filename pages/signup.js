@@ -26,7 +26,7 @@ const Signup = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "https://anshu.up.railway.app/users",
+        url: "http://localhost:4000/users",
         headers: { "Content-Type": "application/json" },
         data: {
           name: values.name,

@@ -24,7 +24,7 @@ const Verify = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "https://anshu.up.railway.app/users/verify",
+        url: "http://localhost:4000/users/verify",
         headers: { "Content-Type": "application/json" },
         data: { email: router.query.email, otp: values.otp },
       });

@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [Showlink, setShowLink] = useState(true);
+  useLayoutEffect(() => {
+    let isLoggedIn = localStorage.getItem('login')
+    if (isLoggedIn) {
+      setShowLink(!Showlink)
+    }
+    else {
+      setShowLink(!Showlink)
+    }
+  }, [Showlink])
   return (
     <div>
       <nav className="w-full z-10 relative ">
@@ -32,22 +42,27 @@ function Navbar() {
                   >
                     Dashboard
                   </Link>
-                  <Link
-                    href="/signup"
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Signup
-                  </Link>
-                  <Link
-                    href="/login"
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer bg-[#00b9f5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                  >
-                    Login
-                  </Link>
+                  {
+                    Showlink && <>
+                      <Link
+                        href="/signup"
+                        offset={50}
+                        duration={500}
+                        className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      >
+                        Signup
+                      </Link>
+                      <Link
+                        href="/login"
+                        offset={50}
+                        duration={500}
+                        className="cursor-pointer bg-[#00b9f5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
+                      >
+                        Login
+                      </Link>
+                    </>
+                  }
+
                 </div>
               </div>
             </div>
@@ -130,23 +145,28 @@ function Navbar() {
                   Dashboard
                 </Link>
 
-                <Link
-                  href="/signup"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Signup
-                </Link>
+                {
+                  Showlink && <>
+                    <Link
+                      href="/signup"
+                      offset={50}
+                      duration={500}
+                      className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Signup
+                    </Link>
 
-                <Link
-                  href="/login"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Login
-                </Link>
+                    <Link
+                      href="/login"
+                      offset={50}
+                      duration={500}
+                      className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Login
+                    </Link>
+                  </>
+                }
+
               </div>
             </div>
           )}

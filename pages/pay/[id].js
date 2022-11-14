@@ -59,7 +59,7 @@ const Pay = ({ link }) => {
 export default Pay;
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${context.params.id}`)
+  const res = await fetch(`http://localhost:4000/genlink/uid/${context.params.id}`)
   const link = await res.json()
   if (link.length < 1) {
     return {

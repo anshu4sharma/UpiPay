@@ -25,7 +25,7 @@ const Index = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "https://anshu.up.railway.app/genlink",
+        url: "http://localhost:4000/genlink",
         headers: { "Content-Type": "application/json" },
         data: {
           name: values.name,

@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import loginSchema from "../formSchemas/loginSchema";
-import logo from "../assets/lootie.svg";
-import Image from "next/image";
 import { useContext } from "react";
 import MerchantContext from "../context/MerchantContext";
+import Router from "next/router";
 const Login = () => {
   const user = useContext(MerchantContext);
   const [iserror, setIserror] = useState(false);
@@ -27,14 +26,14 @@ const Login = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "https://anshu.up.railway.app/users/login",
+        url: "http://localhost:4000/users/login",
         headers: { "Content-Type": "application/json" },
         data: { email: values.email, password: values.password },
         withCredentials: true, // Don't forget to specify this if you need cookies
       });
       if (data.status == 200) {
-        localStorage.setItem("authtoken", data.data.authToken);
-        localStorage.setItem("IsLoggedin", true);
+        localStorage.setItem("login",true)
+       Router.push('/dashboard')
       }
     } catch (error) {
       setIserror(true);
