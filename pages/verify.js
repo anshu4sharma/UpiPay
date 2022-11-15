@@ -1,11 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import otpSchema from "../formSchemas/otpSchema";
-import logo from "../assets/lootie.svg";
+import HeaderLogo from '../components/HeaderLogo'
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 const Verify = () => {
   const router = useRouter();
   const [iserror, setIserror] = useState(false);
@@ -24,16 +23,17 @@ const Verify = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "http://localhost:4000/users/verify",
+        url: "https://anshu.up.railway.app/users/verify",
         headers: { "Content-Type": "application/json" },
         data: { email: router.query.email, otp: values.otp },
       });
       if (data.status == 200) {
-        console.log("succes");
+        toast("Verified SuccessFully")
+        router.push('/login')
       }
     } catch (error) {
       setIsloading(false);
-        setIserror(true);
+      setIserror(true);
     }
   };
   return (
@@ -44,15 +44,7 @@ const Verify = () => {
             className="sm:mt-0 sm:gap-0 grid gap-3 mt-16 mb-0 space-y-4 rounded-lg p-8 "
             onSubmit={handleSubmit}
           >
-            <div className="flex text-center w-full flex-col">
-              <Image
-                alt="logo"
-                className="animate-bounce self-center"
-                src={logo}
-                width="80"
-              />
-              <p className="text-2xl font-medium">Sign in to your account</p>
-            </div>
+            <HeaderLogo text="Please enter the verification code" />
             <div>
               <label htmlFor="email" className="text-sm font-medium">
                 Email
@@ -92,13 +84,13 @@ const Verify = () => {
             )}
 
             {isloading ? (
-              <button className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white transition">
+              <button className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white transition">
                 Processing...
               </button>
             ) : (
               <button
                 type="submit"
-                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                className="block w-full rounded-lg bg-[#002970]  px-5 py-3 text-sm font-medium text-white"
               >
                 Verify
               </button>

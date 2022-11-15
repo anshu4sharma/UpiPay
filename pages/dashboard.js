@@ -1,187 +1,74 @@
-import Image from "next/image";
-import React, { useState } from "react";
-import Ilustration from "../assets/paymentlink.jpg";
-import { useFormik } from "formik";
-import paymentLinkSchema from "../formSchemas/paymentLinkSchema";
-import axios from "axios";
-import Swal from 'sweetalert2'
-const Index = () => {
-  const [iserror, setIserror] = useState(false);
-  const [isloading, setIsloading] = useState(false);
-  const { handleSubmit, values, handleChange, touched, errors, resetForm } = useFormik({
-    initialValues: {
-      name: "",
-      upiId: "",
-      amount: "",
-      description: "",
-    },
-    validationSchema: paymentLinkSchema,
-    onSubmit: () => {
-      submitForm();
-    },
-  });
-  const submitForm = async () => {
-    try {
-      setIsloading(true);
-      let data = await axios({
-        method: "post",
-        url: "http://localhost:4000/genlink",
-        headers: { "Content-Type": "application/json" },
-        data: {
-          name: values.name,
-          upiId: values.upiId,
-          amount: values.amount,
-          description: values.description,
-          merchantId: 9813198,
-        },
-      });
-      if (data.status === 200) {
-        await Swal.fire({
-          icon: 'success',
-          title: 'Success'
-        })
-      }
-    } catch (error) {
-      setIserror(true);
-      await Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      })
-    } finally {
-      setIsloading(false);
-      resetForm()
-    }
-  };
+import { useState } from 'react'
+import { RadioGroup } from '@headlessui/react'
+import CheckIcon from '../components/Checkicon'
+export default function Dashboard({ links }) {
+  console.log(links);
+  // navigator.clipboard.writeText(process.env.REACT_APP_FRONTEND + uid);
   return (
     <>
-      <section className="text-gray-600 body-font relative">
-        <div className="container px-5 mx-auto flex sm:flex-nowrap flex-wrap">
-          <div className="md:w-1/2 rounded-lg sm:justify-center overflow-hidden sm:mr-10  flex  relative">
-            <Image src={Ilustration} className="w-full object-contain sm:w-[400px]" alt="img" />
-          </div>
-          <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full mt-8 md:mt-0">
-            <h2 className="text-gray-900 text-lg mb-1 font-bold title-font">
-              Create a Payment Link
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="relative mb-2">
-                <label
-                  htmlFor="name"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  id="name"
-                  name="name"
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-3 leading-4 transition-colors duration-200 ease-in-out"
-                  value={values.name}
-                />
-                {errors.name && touched.name ? (
-                  <p className="text-red-900">{errors.name}</p>
-                ) : null}
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap">
+          <div class="flex flex-wrap -m-4">
+
+            <div class="p-4 lg:w-1/2 md:w-full">
+              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8" viewBox="0 0 24 24">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{links[0].name}</h2>
+                  <p class="leading-relaxed text-base">{links[0].description}</p>
+                  <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                </div>
               </div>
-              <div className="relative mb-2">
-                <label
-                  htmlFor="email"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  Amount
-                </label>
-                <input
-                  type="number"
-                  onChange={handleChange}
-                  id="amount"
-                  name="amount"
-                  value={values.amount}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
-                />
-                {errors.amount && touched.amount ? (
-                  <p className="text-red-900">{errors.amount}</p>
-                ) : null}
+            </div>
+            <div class="p-4 lg:w-1/2 md:w-full">
+              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8" viewBox="0 0 24 24">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 text-lg title-font font-medium mb-3">{links[0].name}</h2>
+                  <p class="leading-relaxed text-base">{links[0].description}</p>
+                  <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                      <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                </div>
               </div>
-              <div className="relative mb-2">
-                <label
-                  htmlFor="merchantId"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  MerchantId
-                </label>
-                <input
-                  type="number"
-                  onChange={handleChange}
-                  id="merchantId"
-                  name="merchantId"
-                  value={values.merchantId}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
-                  disabled
-                />
-                {errors.merchantId && touched.merchantId ? (
-                  <p className="text-red-900">{errors.merchantId}</p>
-                ) : null}
-              </div>
-              <div className="relative mb-2">
-                <label
-                  htmlFor="email"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  Upi Id
-                </label>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  value={values.upiId}
-                  id="upiId"
-                  name="upiId"
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
-                />
-                {errors.upiId && touched.upiId ? (
-                  <p className="text-red-900">{errors.upiId}</p>
-                ) : null}
-              </div>
-              <div className="relative mb-2">
-                <label
-                  htmlFor="description"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  Purpose of payment
-                </label>
-                <input
-                  value={values.description}
-                  onChange={handleChange}
-                  id="description"
-                  type={'text'}
-                  name="description"
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
-                />
-                {errors.description && touched.description ? (
-                  <p className="text-red-900">{errors.description}</p>
-                ) : null}
-              </div>
-              {
-                iserror && <p className="text-red-900">Oops there was an error ! Please try again</p>
-              }
-              {isloading ? (
-                <button className="cursor-progress animate-pulse transition block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white">
-                  Processing...
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="block w-full rounded-lg transition bg-[#002970] px-5 py-3 text-sm font-medium text-white"
-                >
-                  Generate link
-                </button>
-              )}
-            </form>
+            </div>
+
           </div>
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Index;
+
+
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://anshu.up.railway.app/genlink/all/9813198`)
+  const links = await res.json()
+  if (links.length < 1) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/404"
+      }
+    }
+  }
+  return {
+    props: { links },
+  }
+}

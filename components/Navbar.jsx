@@ -1,10 +1,10 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 import Link from "next/link";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [Showlink, setShowLink] = useState(true);
-  useLayoutEffect(() => {
+  useEffect(() => {
     let isLoggedIn = localStorage.getItem('login')
     if (isLoggedIn) {
       setShowLink(false)
@@ -30,7 +30,7 @@ function Navbar() {
                     href="/"
                     offset={50}
                     duration={500}
-                    className={`cursor-pointer hover:bg-[#00b9f5] hover:text-white rounded-md  text-sm font-medium text-black px-3 py-2 text-md hover:font-black`}
+                    className={`cursor-pointer hover:bg-[#002970] hover:text-white rounded-md  text-sm font-medium text-black px-3 py-2 text-md hover:font-black`}
                   >
                     Home
                   </Link>
@@ -38,9 +38,25 @@ function Navbar() {
                     href="/dashboard"
                     offset={50}
                     duration={500}
-                    className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    href="/genlink"
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Create Payment Link
+                  </Link>
+                  <Link
+                    href="/contact"
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Contact Us
                   </Link>
                   {
                     Showlink && <>
@@ -48,7 +64,7 @@ function Navbar() {
                         href="/signup"
                         offset={50}
                         duration={500}
-                        className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Signup
                       </Link>
@@ -56,7 +72,7 @@ function Navbar() {
                         href="/login"
                         offset={50}
                         duration={500}
-                        className="cursor-pointer bg-[#00b9f5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
+                        className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
                       >
                         Login
                       </Link>
@@ -70,7 +86,7 @@ function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="bg-[#00b9f5] inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white-800 focus:ring-white"
+                className="bg-[#002970] inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white-800 focus:ring-white"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
@@ -132,7 +148,7 @@ function Navbar() {
                   href="/"
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Home
                 </Link>
@@ -140,9 +156,25 @@ function Navbar() {
                   href="/dashboard"
                   offset={50}
                   duration={500}
-                  className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Dashboard
+                </Link>
+                <Link
+                  href="/genlink"
+                  offset={50}
+                  duration={500}
+                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                   Create Payment Link
+                </Link>
+                <Link
+                  href="/contact"
+                  offset={50}
+                  duration={500}
+                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Contact Us
                 </Link>
 
                 {
@@ -151,7 +183,7 @@ function Navbar() {
                       href="/signup"
                       offset={50}
                       duration={500}
-                      className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       Signup
                     </Link>
@@ -160,7 +192,7 @@ function Navbar() {
                       href="/login"
                       offset={50}
                       duration={500}
-                      className="cursor-pointer hover:bg-[#00b9f5] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       Login
                     </Link>

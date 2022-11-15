@@ -1,14 +1,9 @@
+import { useState } from "react";
 import MerchantContext from "./MerchantContext";
-const state = "anshu sahd asd12332";
-const fecthMerchantId = ()=>{
-  
-}
-const isUserLoggedIn =()=>{
-
-}
 const MerchantDetails = ({ children }) => {
+  const [MerchantId, setMerchantId] = useState("")
   return (
-    <MerchantContext.Provider value={state}>
+    <MerchantContext.Provider value={{MerchantId,setMerchantId}}>
       {children}
     </MerchantContext.Provider>
   );

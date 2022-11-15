@@ -1,6 +1,5 @@
 import React from "react";
 import QRCode from "react-qr-code";
-
 const Pay = ({ link }) => {
   const { upiId, amount, name, description } = link[0]
   let upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR&tn=${description}`
@@ -44,10 +43,10 @@ const Pay = ({ link }) => {
           </div>
           <dl className="mt-6 flex">
             <a
-              className="inline-block rounded border  bg-[#0484af] px-10 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+              className="inline-block rounded border bg-[#002970] px-10 py-3 text-sm font-medium text-white "
               href={upiLink}
             >
-              Pay now
+              Pay now ⚡
             </a>
           </dl>
         </div>
@@ -59,7 +58,7 @@ const Pay = ({ link }) => {
 export default Pay;
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`http://localhost:4000/genlink/uid/${context.params.id}`)
+  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${context.params.id}`)
   const link = await res.json()
   if (link.length < 1) {
     return {

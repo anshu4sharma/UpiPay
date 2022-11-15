@@ -4,9 +4,20 @@ import React from "react";
 import banner from "../assets/banner.webp";
 import zerocharge from "../assets/zero.svg";
 import collectPayments from "../assets/collectPayments.webp";
+import Head from "next/head";
 const Home = () => {
   return (
     <>
+      <Head>
+        <title>UpiPay</title> 
+        <html lang="eng" />
+        <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
+        <meta property="og:title" content="Upi Pay Payment Links" />
+        <meta property="og:description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Link" />
+        <meta property="og:url" content="https://upipayy.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <section className="text-gray-600 body-font">
         <div className="container mx-auto flex px-10 py-4 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
@@ -16,7 +27,7 @@ const Home = () => {
             <h1 className=" font-extrabold title-font sm:text-5xl text-3xl mb-4  text-gray-900">
               Collect Online Payments from anywhere in India.
             </h1>
-            <h1 className=" font-extrabold leading-10 title-font sm:text-5xl text-3xl mb-4  text-[#00b9f5]">
+            <h1 className=" font-extrabold leading-10 sm:text-5xl text-3xl mb-4 text-[#00b9f5]">
               No Coding Required.
             </h1>
             <Link
@@ -38,7 +49,6 @@ const Home = () => {
         </div>
       </section>
       {/*  Collect Online Payments end here */}
-
       <section className="text-gray-600 body-font text-center">
         <h1 className="font-bold text-4xl text-black leading-10 my-4">
           Collect Payments in 3 Easy Steps
@@ -56,7 +66,7 @@ const Home = () => {
               <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                 <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
               </div>
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -82,7 +92,7 @@ const Home = () => {
               <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                 <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
               </div>
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -108,7 +118,7 @@ const Home = () => {
               <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                 <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
               </div>
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative z-10">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#0295fc] inline-flex items-center justify-center text-white relative">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -136,7 +146,7 @@ const Home = () => {
       </section>
 
       <section className="text-gray-600 body-font text-center">
-        <div className="flex justify-center items-center sm:max-w-6xl gap-16 flex-col rounded-3xl mx-auto mt-0  py-20 text-center bg-[#f2fbff]">
+        <div className="flex justify-center items-center sm:max-w-6xl gap-16 flex-col rounded-3xl mx-auto mt-0 py-20 text-center bg-[#f2fbff]">
           <div className="font-bold flex flex-col text-2xl sm:text-4xl text-center text-black ">
             No Setup Fees, No Maintenance Charges
             <span className="font-bold text-2xl sm:text-4xl text-center text-black ">

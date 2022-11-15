@@ -2,11 +2,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import logo from "../assets/lootie.svg";
-import Image from "next/image";
 import signupSchema from "../formSchemas/signupSchema";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import HeaderLogo from '../components/HeaderLogo'
+import MerchantContext from "../context/MerchantContext";
 const Signup = () => {
+  const {MerchantId,setMerchantId} = useContext(MerchantContext);
   const router = useRouter();
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
@@ -26,7 +28,7 @@ const Signup = () => {
       setIsloading(true);
       let data = await axios({
         method: "post",
-        url: "http://localhost:4000/users",
+        url: "https://anshu.up.railway.app/users",
         headers: { "Content-Type": "application/json" },
         data: {
           name: values.name,
@@ -35,6 +37,7 @@ const Signup = () => {
         },
       });
       if (data.status === 200) {
+        setMerchantId(data.data.merchantId);
         router.push({ pathname: "/verify", query: { email: values.email } });
       }
     } catch (error) {
@@ -51,12 +54,7 @@ const Signup = () => {
             className="sm:gap-0 grid gap-3  mb-0 space-y-4 rounded-lg p-8 "
             onSubmit={handleSubmit}
           >
-            <div className="flex text-center w-full flex-col">
-              <div className="text-4xl mb-4 font-semibold">
-                Upi<span className="text-[#00b9f5]">Pay</span>
-              </div>
-              <p className="text-xl font-medium">Sign Up</p>
-            </div>
+            <HeaderLogo text="Create a new account" />
             <div>
               <label htmlFor="email" className="text-sm font-medium">
                 Name
