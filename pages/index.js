@@ -9,8 +9,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>UpiPay</title> 
-        <html lang="eng" />
+        <title>UpiPay</title>
         <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
         <meta property="og:title" content="Upi Pay Payment Links" />
         <meta property="og:description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Link" />
