@@ -63,14 +63,14 @@ function Navbar() {
                         </button>
                       </>
                       :
-                      <Link
+                      <button
                         offset={50}
                         duration={500}
                         className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                        href={'/signin'}
+                        onClick={() => signIn()}
                       >
                         Login
-                      </Link>
+                      </button>
                   }
 
                 </div>
@@ -173,7 +173,7 @@ function Navbar() {
                       Create Payment Link
                     </Link>
                     <button
-                      href="/signin"
+                      href="/login"
                       offset={50}
                       duration={500}
                       className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
@@ -181,14 +181,14 @@ function Navbar() {
                     >
                       Sign Out
                     </button>
-                  </> : <Link
-                    href="/signin"
+                  </> : <button
+                    onClick={() => signIn()}
                     offset={50}
                     duration={500}
                     className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Login
-                  </Link>
+                  </button>
                 }
 
               </div>

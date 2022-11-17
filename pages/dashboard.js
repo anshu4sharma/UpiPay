@@ -3,9 +3,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 export default function Dashboard({ links }) {
   const router = useRouter()
-  const { data: session } = useSession({ required: true })
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/')
+    },
+  })
   if (!session) {
-    return router.push('/signin')
+    router.push('/')
   }
   return (
     <>
@@ -104,12 +109,12 @@ export default function Dashboard({ links }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
-  const res = await fetch(`https://anshu.up.railway.app/genlink/all/${session.user.email}`)
+  const res = await fetch(`https://anshu.up.railway.app/genlink/all/${session?.user.email}`)
   const links = await res.json()
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permanent: false
       }
     }

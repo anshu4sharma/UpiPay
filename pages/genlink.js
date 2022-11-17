@@ -7,7 +7,12 @@ import axios from "axios";
 import Dialog from "../components/Dialog";
 import { useSession, getSession } from 'next-auth/react'
 const Genlink = () => {
-  const { data: session } = useSession({ required: true })
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/')
+    },
+  })
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
   let [isOpen, setIsOpen] = useState(false)
@@ -202,7 +207,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permanent: false
       }
     }

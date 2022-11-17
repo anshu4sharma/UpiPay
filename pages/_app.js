@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Progress } from '../components/progress';
 import { useProgressStore } from '../store';
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
   const isAnimating = useProgressStore((state) => state.isAnimating);
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <>
       <SessionProvider session={session}>
-      <Progress isAnimating={isAnimating} />
+        <Progress isAnimating={isAnimating} />
         <Navbar />
         <Toaster />
         <Component {...pageProps} />
