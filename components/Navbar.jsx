@@ -27,22 +27,6 @@ function Navbar() {
                     Home
                   </Link>
                   <Link
-                    href="/dashboard"
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/genlink"
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Create Payment Link
-                  </Link>
-                  <Link
                     href="/contact"
                     offset={50}
                     duration={500}
@@ -52,14 +36,33 @@ function Navbar() {
                   </Link>
                   {
                     status === "authenticated" ?
-                      <button
-                        offset={50}
-                        duration={500}
-                        className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                        onClick={() => signOut()}
-                      >
-                        Sign Out
-                      </button> :
+                      <>
+                        <Link
+                          href="/genlink"
+                          offset={50}
+                          duration={500}
+                          className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          Create Payment Link
+                        </Link>
+                        <Link
+                          href="/dashboard"
+                          offset={50}
+                          duration={500}
+                          className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          Dashboard
+                        </Link>
+                        <button
+                          offset={50}
+                          duration={500}
+                          className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
+                          onClick={() => signOut()}
+                        >
+                          Sign Out
+                        </button>
+                      </>
+                      :
                       <Link
                         offset={50}
                         duration={500}
@@ -144,22 +147,6 @@ function Navbar() {
                   Home
                 </Link>
                 <Link
-                  href="/dashboard"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/genlink"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Create Payment Link
-                </Link>
-                <Link
                   href="/contact"
                   offset={50}
                   duration={500}
@@ -167,14 +154,43 @@ function Navbar() {
                 >
                   Contact Us
                 </Link>
-                <Link
-                  href="/signin"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Login
-                </Link>
+                {
+                  status === "authenticated" ? <>
+                    <Link
+                      href="/dashboard"
+                      offset={50}
+                      duration={500}
+                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      href="/genlink"
+                      offset={50}
+                      duration={500}
+                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Create Payment Link
+                    </Link>
+                    <button
+                      href="/signin"
+                      offset={50}
+                      duration={500}
+                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                      onClick={() => signOut()}
+                    >
+                      Sign Out
+                    </button>
+                  </> : <Link
+                    href="/signin"
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Login
+                  </Link>
+                }
+
               </div>
             </div>
           )}

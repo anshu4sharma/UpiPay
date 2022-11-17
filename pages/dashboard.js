@@ -1,7 +1,12 @@
-import { getSession } from 'next-auth/react'
+import { getSession ,useSession } from 'next-auth/react'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 export default function Dashboard({ links }) {
-  console.log(links);
+  const router = useRouter()
+  const { data: session } = useSession({ required: true })
+  if (!session) {
+  router.push('/signin')
+  }
   return (
     <>
       <div className="bg-white p-8 rounded-md w-full">
