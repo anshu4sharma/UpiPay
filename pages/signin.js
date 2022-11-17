@@ -3,7 +3,7 @@ import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from "next/router";
 const Login = () => {
   const router = useRouter()
-  const { status } = useSession({ required: true })
+  const { status } = useSession()
   if (status === "authenticated") {
   return router.push('/genlink')
   }
