@@ -1,13 +1,13 @@
 import Image from "next/image";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Ilustration from "../assets/paymentlink.jpg";
 import { useFormik } from "formik";
 import paymentLinkSchema from "../formSchemas/paymentLinkSchema";
 import axios from "axios";
 import Dialog from "../components/Dialog";
-import MerchantContext from "../context/MerchantContext";
+import { useSession, getSession } from 'next-auth/react'
 const Genlink = () => {
-  const { MerchantId } = useContext(MerchantContext);
+  const { data: session } = useSession({ required: true })
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
   let [isOpen, setIsOpen] = useState(false)
@@ -39,7 +39,7 @@ const Genlink = () => {
           upiId: values.upiId,
           amount: values.amount,
           description: values.description,
-          merchantId: MerchantId,
+          merchantId: session?.user.email,
         },
       });
       if (data.status === 200) {
@@ -108,23 +108,19 @@ const Genlink = () => {
               </div>
               <div className="relative mb-2">
                 <label
-                  htmlFor="merchantId"
+                  htmlFor="Email"
                   className="leading-7 text-sm text-gray-600"
                 >
-                  MerchantId
+                  Email
                 </label>
                 <input
-                  type="number"
-                  onChange={handleChange}
-                  id="merchantId"
-                  name="merchantId"
-                  value={values.merchantId}
+                  type="text"
+                  id="Email"
+                  name="Email"
+                  value={session?.user.email}
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
                   disabled
                 />
-                {errors.merchantId && touched.merchantId ? (
-                  <p className="text-red-900">{errors.merchantId}</p>
-                ) : null}
               </div>
               <div className="relative mb-2">
                 <label
@@ -168,9 +164,20 @@ const Genlink = () => {
                 iserror && <p className="text-red-900">Oops there was an error ! Please try again</p>
               }
               {isloading ? (
-                <button className="cursor-progress animate-pulse transition block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white">
-                  Processing...
-                </button>
+                <div class="flex items-center justify-center">
+                  <button type="button"
+                    class="w-full rounded-lg transition bg-[#002970] px-5 py-3 text-sm font-medium flex items-center leading-6 text-indigo-400 my-4 duration-150 ease-in-out border-2 border-indigo-400 shadow cursor-not-allowed"
+                    disabled="">
+                    <svg class="w-5 h-5 mr-3 -ml-1 text-indigo-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                      </path>
+                    </svg>
+                    Loading...
+                  </button>
+                </div>
               ) : (
                 <button
                   type="submit"
@@ -179,6 +186,7 @@ const Genlink = () => {
                   Generate link
                 </button>
               )}
+
             </form>
           </div>
         </div>
@@ -186,5 +194,22 @@ const Genlink = () => {
     </>
   );
 };
-
 export default Genlink;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+  console.log(session);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false
+      }
+    }
+  }
+  return {
+    props: {
+      session
+    }
+  }
+}

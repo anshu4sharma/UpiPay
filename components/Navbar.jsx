@@ -1,18 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
+import { useSession, signIn, signOut } from 'next-auth/react'
 import Link from "next/link";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [Showlink, setShowLink] = useState(true);
-  useEffect(() => {
-    let isLoggedIn = localStorage.getItem('login')
-    if (isLoggedIn) {
-      setShowLink(false)
-    }
-    else {
-      setShowLink(true)
-    }
-  }, [])
+  const { status } = useSession()
   return (
     <div>
       <nav className="w-full z-10 relative ">
@@ -59,24 +51,23 @@ function Navbar() {
                     Contact Us
                   </Link>
                   {
-                    Showlink && <>
-                      <Link
-                        href="/signup"
-                        offset={50}
-                        duration={500}
-                        className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                      >
-                        Signup
-                      </Link>
-                      <Link
-                        href="/login"
+                    status === "authenticated" ?
+                      <button
                         offset={50}
                         duration={500}
                         className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
+                        onClick={()=>signOut()}
+                      >
+                        Sign Out
+                      </button> :
+                      <button
+                        offset={50}
+                        duration={500}
+                        className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
+                        onClick={()=>signIn()}
                       >
                         Login
-                      </Link>
-                    </>
+                      </button>
                   }
 
                 </div>
@@ -166,7 +157,7 @@ function Navbar() {
                   duration={500}
                   className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                   Create Payment Link
+                  Create Payment Link
                 </Link>
                 <Link
                   href="/contact"
@@ -176,29 +167,14 @@ function Navbar() {
                 >
                   Contact Us
                 </Link>
-
-                {
-                  Showlink && <>
-                    <Link
-                      href="/signup"
-                      offset={50}
-                      duration={500}
-                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Signup
-                    </Link>
-
-                    <Link
-                      href="/login"
-                      offset={50}
-                      duration={500}
-                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Login
-                    </Link>
-                  </>
-                }
-
+                <Link
+                  href="/login"
+                  offset={50}
+                  duration={500}
+                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Login
+                </Link>
               </div>
             </div>
           )}
@@ -209,3 +185,13 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+  return {
+    props: {
+      session
+    }
+  }
+}

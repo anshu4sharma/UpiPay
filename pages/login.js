@@ -1,125 +1,37 @@
-import Link from "next/link";
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import loginSchema from "../formSchemas/loginSchema";
 import HeaderLogo from '../components/HeaderLogo'
-import Router from "next/router";
-import toast from "react-hot-toast";
+import { useSession, signIn } from 'next-auth/react'
+import { useRouter } from "next/router";
 const Login = () => {
-  const [iserror, setIserror] = useState(false);
-  const [isloading, setIsloading] = useState(false);
-  const [isEmailVerified, setisEmailVerified] = useState(false);
-  const { handleSubmit, values, handleChange, touched, errors } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: loginSchema,
-    onSubmit: () => {
-      fetchData();
-    },
-  });
-  const fetchData = async () => {
-    try {
-      setIsloading(true);
-      let data = await axios({
-        method: "post",
-        url: "https://anshu.up.railway.app/users/login",
-        headers: { "Content-Type": "application/json" },
-        data: { email: values.email, password: values.password },
-        withCredentials: true, // Don't forget to specify this if you need cookies
-        crossDomain: true,
-      });
-      if (data.status == 200) {
-        localStorage.setItem("login", true)
-        toast("Login Success")
-        Router.push('/dashboard')
-      }
-    } catch (error) {
-      setIserror(true);
-    } finally {
-      setIsloading(false);
-    }
-  };
-
-  return (
-    <>
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="sm:mt-0 mb-24 mx-auto max-w-lg">
-          <form
-            className="sm:mt-0 sm:gap-0 grid gap-3 mt-16 mb-0 space-y-4 rounded-lg p-8 "
-            onSubmit={handleSubmit}
-          >
-            <HeaderLogo text="Sign in to your account" />
-            <div>
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <div className="relative mt-1">
-                <input
-                  type="email"
-                  className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
-                  placeholder="E-Mail"
-                  value={values.email}
-                  onChange={handleChange}
-                  name="email"
-                  autoComplete="on"
-                />
-                {errors.email && touched.email ? (
-                  <p className="text-red-900">{errors.email}</p>
-                ) : null}
-              </div>
+  const router = useRouter()
+  const { status } = useSession()
+  if (status === "authenticated") {
+    router.push('/genlink')
+  }
+  else return (
+    <div class="min-h-screen flex flex-col justify-center">
+      <div class="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+        <HeaderLogo />
+        <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
+          <div class="px-5 py-10">
+            <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
+            <input type="text" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+            <label class="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
+            <input type="text" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+            <button onClick={() => signIn()} type="button" class="transition duration-200 bg-[#002970] hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
+              <span class="inline-block mr-2">Login</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 inline-block">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
+          <div class="p-5">
+            <div class="grid grid-cols-1">
+              <button onClick={() => signIn()} type="button" class="transition duration-200 border bg-[#002970] border-gray-200 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block">Login with Google</button>
             </div>
-            <div>
-              <label htmlFor="password" className="text-sm font-medium">
-                Password
-              </label>
-              <div className="relative mt-1">
-                <input
-                  className="w-full rounded-lg border-gray-200 p-3 pr-12 text-sm shadow-sm"
-                  placeholder="Password"
-                  value={values.password}
-                  onChange={handleChange}
-                  name="password"
-                  type="password"
-                  autoComplete="on"
-                />
-                {errors.password && touched.password ? (
-                  <p className="text-red-900">{errors.password}</p>
-                ) : null}
-              </div>
-            </div>
-            {iserror && (
-              <p className="text-red-900">Please enter valid credentials</p>
-            )}
-            {isEmailVerified && (
-              <p className="text-red-900">You have not verified your email.</p>
-            )}
-
-            {isloading ? (
-              <button className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white transition">
-                Processing...
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="block w-full rounded-lg bg-[#002970] px-5 py-3 text-sm font-medium text-white"
-              >
-                Log in
-              </button>
-            )}
-
-            <p className="text-center text-sm text-gray-500">
-              No account? {""}
-              <Link className="underline" href="/signup">
-                Sign up
-              </Link>
-            </p>
-          </form>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

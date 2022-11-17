@@ -1,8 +1,9 @@
 import React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import Link from 'next/link'
 const DialogBox = ({ closeModal, isOpen, linkuid }) => {
-    let link = `http://localhost:3000/pay/${linkuid}`
+    let link = `https://upipayy.vercel.app/pay/${linkuid}`
     const copyToClipboard = () => navigator.clipboard.writeText(link)
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -34,12 +35,12 @@ const DialogBox = ({ closeModal, isOpen, linkuid }) => {
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
-                                    Link created successful
+                                    Link created successfully !
                                 </Dialog.Title>
                                 <div className="mt-2">
-                                    <p className="text-sm text-gray-500">
-                                        {link}
-                                    </p>
+                                    <Link href={link} className="text-sm text-gray-500">
+                                        🔗 {link}
+                                    </Link>
                                 </div>
                                 <div className="flex gap-4">
                                     <div className="mt-4">
