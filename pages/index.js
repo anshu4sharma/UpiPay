@@ -30,7 +30,7 @@ const Home = () => {
               No Coding Required.
             </h1>
             <Link
-              href="/dashboard"
+              href="/signin"
               className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
             >
               Get Payment Link

@@ -56,18 +56,18 @@ function Navbar() {
                         offset={50}
                         duration={500}
                         className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                        onClick={()=>signOut()}
+                        onClick={() => signOut()}
                       >
                         Sign Out
                       </button> :
-                      <button
+                      <Link
                         offset={50}
                         duration={500}
                         className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                        onClick={()=>signIn()}
+                        href={'/signin'}
                       >
                         Login
-                      </button>
+                      </Link>
                   }
 
                 </div>
@@ -168,7 +168,7 @@ function Navbar() {
                   Contact Us
                 </Link>
                 <Link
-                  href="/login"
+                  href="/signin"
                   offset={50}
                   duration={500}
                   className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
