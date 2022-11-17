@@ -1,11 +1,11 @@
-import { getSession ,useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 export default function Dashboard({ links }) {
   const router = useRouter()
   const { data: session } = useSession({ required: true })
   if (!session) {
-  router.push('/signin')
+    return router.push('/signin')
   }
   return (
     <>

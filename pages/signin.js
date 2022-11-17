@@ -3,9 +3,9 @@ import { useSession, signIn } from 'next-auth/react'
 import { useRouter } from "next/router";
 const Login = () => {
   const router = useRouter()
-  const { status } = useSession()
+  const { status } = useSession({ required: true })
   if (status === "authenticated") {
-    router.push('/genlink')
+  return router.push('/genlink')
   }
   else return (
     <div class="min-h-screen items-center flex  flex-col justify-center">
