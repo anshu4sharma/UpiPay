@@ -29,6 +29,7 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         data: { email: values.email, password: values.password },
         withCredentials: true, // Don't forget to specify this if you need cookies
+        crossDomain: true,
       });
       if (data.status == 200) {
         localStorage.setItem("login", true)
