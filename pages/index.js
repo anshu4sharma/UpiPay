@@ -4,8 +4,10 @@ import banner from "../assets/banner.webp";
 import zerocharge from "../assets/zero.svg";
 import collectPayments from "../assets/collectPayments.webp";
 import Head from "next/head";
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
+import Link from "next/link";
 const Home = () => {
+  const { data: session } = useSession()
   return (
     <>
       <Head>
@@ -29,12 +31,20 @@ const Home = () => {
             <h1 className=" font-extrabold leading-10 sm:text-5xl text-3xl mb-4 text-[#00b9f5]">
               No Coding Required.
             </h1>
-            <button
-              onClick={() => signIn()}
-              className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
-            >
-              Get Payment Link
-            </button>
+            {
+              session ? <Link
+                className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
+                href={'/genlink'}
+              >
+                Get Payment Link
+              </Link> :
+                <button
+                  onClick={() => signIn()}
+                  className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
+                >
+                  Get Payment Link
+                </button>
+            }
             <div className="flex leading-10  w-full md:justify-start justify-center items-end"></div>
             <div className="flex lg:flex-row md:flex-col"></div>
           </div>
