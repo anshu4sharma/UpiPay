@@ -1,17 +1,6 @@
-import { getSession, useSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 export default function Dashboard({ links }) {
-  const router = useRouter()
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/')
-    },
-  })
-  if (!session) {
-    router.push('/')
-  }
   return (
     <>
       <div className="bg-white p-8 rounded-md w-full">

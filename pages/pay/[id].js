@@ -1,7 +1,7 @@
 import React from "react";
 import QRCode from "react-qr-code";
 const Pay = ({ link }) => {
-  const { upiId, amount, name, description } = link[0]
+  const { upiId, amount, name, description } = link
   let upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR&tn=${description}`
   return <>
     <div className="flex flex-row mt-8  justify-center">
@@ -55,17 +55,26 @@ const Pay = ({ link }) => {
 
 export default Pay;
 
-export async function getServerSideProps(context) {
-  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${context.params.id}`)
-  const link = await res.json()
-  if (link.length < 1) {
+export async function getStaticPaths() {
+  const res = await fetch('https://anshu.up.railway.app/genlink/showall')
+  const links = await res.json()
+  const paths = links.map((items) => {
     return {
-      redirect: {
-        permanent: false,
-        destination: "/404"
-      }
+      params: { id: items.uid }
     }
+  })
+
+  return {
+    paths,
+    fallback: 'blocking', // can also be true or 'blocking'
   }
+}
+
+export async function getStaticProps({ params }) {
+
+  const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${params.id}`)
+  const [link] = await res.json()
+
   return {
     props: { link },
   }
