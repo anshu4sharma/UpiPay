@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Progress } from '../components/progress';
 import { useProgressStore } from '../store';
+import Script from "next/script"
 import { useEffect } from 'react'
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
@@ -31,6 +32,21 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   }, [router]);
   return (
     <>
+    <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-2R1DH80QG2" />
+        <Script
+          id='google-analytics'
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-2R1DH80QG2', {
+            page_path: window.location.pathname,
+          });
+        `,
+          }}
+        />
       <SessionProvider session={session}>
         <Progress isAnimating={isAnimating} />
         <Navbar />
