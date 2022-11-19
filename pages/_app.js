@@ -6,7 +6,6 @@ import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Progress } from '../components/progress';
 import { useProgressStore } from '../store';
-import Script from "next/script"
 import { useEffect } from 'react'
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
