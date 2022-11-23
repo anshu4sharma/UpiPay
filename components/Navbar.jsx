@@ -44,14 +44,6 @@ function Navbar() {
           </li>
           <li>
             <Link
-              href="/qrcode"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
-            >
-              My Qr Code
-            </Link>
-          </li>
-          <li>
-            <Link
               href="/links"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
             >
@@ -160,14 +152,6 @@ function Navbar() {
                         Payment Links
                       </Link>
                     </li>
-                    <li>
-                      <Link
-                        href="/qrcode"
-                      >
-                        My Qr Code
-                      </Link>
-                    </li>
-
                     {
                       status === "authenticated" ? <>
                         <li>
