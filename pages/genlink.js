@@ -4,14 +4,15 @@ import Ilustration from "../assets/paymentlink.jpg";
 import { useFormik } from "formik";
 import paymentLinkSchema from "../formSchemas/paymentLinkSchema";
 import axios from "axios";
-import Dialog from "../components/Dialog";
-import { useSession, getSession } from 'next-auth/react'
+const Dialog = dynamic(() => import('../components/Dialog'), {
+  ssr: false,
+})
+import { useSession } from 'next-auth/react'
+import Head from "next/head";
+import dynamic from "next/dynamic";
 const Genlink = () => {
   const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/')
-    },
+    required: true
   })
   const [iserror, setIserror] = useState(false);
   const [isloading, setIsloading] = useState(false);
@@ -62,11 +63,19 @@ const Genlink = () => {
 
   return (
     <>
-      <Dialog isOpen={isOpen} closeModal={closeModal} linkuid={linkuid} />
+      <Head>
+        <title>Create Payment Link</title>
+        <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link UpiPay Payment Links" />
+        <meta property="og:title" content="Create Payment Link with UpiPay Payment Links" />
+        <meta property="og:description" content="Create Payment Link with UpiPay Payment Links" />
+        <meta property="og:url" content="https://upipayy.vercel.app/genlink" />
+        <meta property="og:type" content="website" />
+      </Head>
       <section className="text-gray-600 body-font relative">
+        <Dialog isOpen={isOpen} closeModal={closeModal} linkuid={linkuid} />
         <div className="container px-5 py-8 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="md:w-1/2 rounded-lg sm:justify-center overflow-hidden sm:mr-10  flex  relative">
-            <Image src={Ilustration} className="w-full object-contain sm:w-[400px]" alt="img" />
+            <Image src={Ilustration} className="w-full object-contain sm:w-[550px]" alt="img" />
           </div>
           <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full mt-8 md:mt-0">
             <h2 className="text-gray-900 text-lg mb-1 font-bold title-font">
@@ -118,14 +127,12 @@ const Genlink = () => {
                 >
                   Email
                 </label>
-                <input
-                  type="text"
-                  id="Email"
-                  name="Email"
-                  value={session?.user.email}
-                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
+                <p
+                  className="py-3 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
                   disabled
-                />
+                >
+                  {session?.user.email}
+                </p>
               </div>
               <div className="relative mb-2">
                 <label
@@ -169,14 +176,14 @@ const Genlink = () => {
                 iserror && <p className="text-red-900">Oops there was an error ! Please try again</p>
               }
               {isloading ? (
-                <div class="flex items-center justify-center">
+                <div className="flex items-center justify-center">
                   <button type="button"
-                    class="w-full rounded-lg transition bg-[#002970] px-5 py-3 text-sm font-medium flex items-center leading-6 text-indigo-400 my-4 duration-150 ease-in-out border-2 border-indigo-400 shadow cursor-not-allowed"
+                    className="w-full rounded-lg transition bg-[#002970] px-5 py-3 text-sm font-medium flex items-center leading-6 text-indigo-400 my-4 duration-150 ease-in-out border-2 border-indigo-400 shadow cursor-not-allowed"
                     disabled="">
-                    <svg class="w-5 h-5 mr-3 -ml-1 text-indigo-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    <svg className="w-5 h-5 mr-3 -ml-1 text-indigo-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none"
                       viewBox="0 0 24 24">
-                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                      <path class="opacity-75" fill="currentColor"
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path className="opacity-75" fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                       </path>
                     </svg>
@@ -200,21 +207,3 @@ const Genlink = () => {
   );
 };
 export default Genlink;
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  console.log(session);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false
-      }
-    }
-  }
-  return {
-    props: {
-      session
-    }
-  }
-}

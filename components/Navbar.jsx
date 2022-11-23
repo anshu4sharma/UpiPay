@@ -1,213 +1,204 @@
 import React, { useState } from "react";
-import { Transition } from "@headlessui/react";
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Link from "next/link";
+import HeaderLogo from './HeaderLogo'
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const { status } = useSession()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div>
-      <nav className="w-full z-10 relative ">
-        <div className="w-full">
-          <div className="flex items-center h-16 w-full">
-            <div className="flex items-center mx-4 justify-between w-full">
-              <div className="flex justify-center items-center flex-shrink-0 ">
-                <Link className="text-2xl font-semibold" href={"/"}>
-                  Upi<span className="text-[#00b9f5]">Pay</span>
-                </Link>
-              </div>
-              <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
-                  <Link
-                    href="/"
-                    offset={50}
-                    duration={500}
-                    className={`cursor-pointer hover:bg-[#002970] hover:text-white rounded-md  text-sm font-medium text-black px-3 py-2 text-md hover:font-black`}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/contact"
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Contact Us
-                  </Link>
-                  {
-                    status === "authenticated" ?
-                      <>
-                        <Link
-                          href="/genlink"
-                          offset={50}
-                          duration={500}
-                          className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                          Create Payment Link
-                        </Link>
-                        <Link
-                          href="/dashboard"
-                          offset={50}
-                          duration={500}
-                          className="cursor-pointer hover:bg-[#002970] text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                          Dashboard
-                        </Link>
-                        <button
-                          offset={50}
-                          duration={500}
-                          className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                          onClick={() => signOut()}
-                        >
-                          Sign Out
-                        </button>
-                      </>
-                      :
-                      <button
-                        offset={50}
-                        duration={500}
-                        className="cursor-pointer bg-[#002970] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#002970]"
-                        onClick={() => signIn()}
-                      >
-                        Login
-                      </button>
-                  }
-
-                </div>
-              </div>
-            </div>
-            <div className="flex md:hidden ">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="bg-[#002970] inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white-800 focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                {!isOpen ? (
-                  <svg
-                    className="block h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="block h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-100 transform"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+      <div className="relative flex items-center justify-between">
+        <Link
+          href="/"
+          aria-label="Company"
+          title="Company"
+          className="inline-flex items-center"
         >
-          {() => (
-            <div
-              className="md:hidden fixed w-full max-h-full z-50"
-              id="mobile-menu"
+          <HeaderLogo />
+        </Link>
+        <ul className="items-center hidden space-x-8 lg:flex">
+          <li>
+            <Link
+              href="/"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
             >
-              <div className="bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <Link
-                  href="/"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/contact"
-                  offset={50}
-                  duration={500}
-                  className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Contact Us
-                </Link>
-                {
-                  status === "authenticated" ? <>
-                    <Link
-                      href="/dashboard"
-                      offset={50}
-                      duration={500}
-                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Dashboard
-                    </Link>
-                    <Link
-                      href="/genlink"
-                      offset={50}
-                      duration={500}
-                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Create Payment Link
-                    </Link>
-                    <button
-                      href="/login"
-                      offset={50}
-                      duration={500}
-                      className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                      onClick={() => signOut()}
-                    >
-                      Sign Out
-                    </button>
-                  </> : <button
-                    onClick={() => signIn()}
-                    offset={50}
-                    duration={500}
-                    className="cursor-pointer hover:bg-[#002970] text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Login
-                  </button>
-                }
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/contact"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
+            >
+              Contact us
+            </Link>
+          </li>
 
+          <li>
+            <Link
+              href="/genlink"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
+            >
+              Create Payment Link
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/qrcode"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
+            >
+              My Qr Code
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/links"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200"
+            >
+              Payment Links
+            </Link>
+          </li>
+          {
+            status === "authenticated" ? <>
+              <li>
+                <button
+                  onClick={() => signOut()}
+                  className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#002970] focus:shadow-outline focus:outline-none"
+                  aria-label="Sign up"
+                  title="Sign up"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </>
+              : <li>
+                <button
+                  onClick={() => signIn()}
+                  className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#002970] focus:shadow-outline focus:outline-none"
+                >
+                  Sign In
+                </button>
+              </li>
+          }
+        </ul>
+        <div className="lg:hidden">
+          <button
+            aria-label="Open Menu"
+            title="Open Menu"
+            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline focus:bg-deep-purple-50"
+            onClick={() => setIsMenuOpen(true)}
+          >
+            <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+              />
+              <path
+                fill="currentColor"
+                d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
+              />
+              <path
+                fill="currentColor"
+                d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
+              />
+            </svg>
+          </button>
+          {isMenuOpen && (
+            <div className="absolute top-0 left-0 w-full z-10	">
+              <div className="p-5 bg-white border rounded shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <Link
+                      href="/"
+                      className="inline-flex items-center"
+                    >
+                      <HeaderLogo />
+                    </Link>
+                  </div>
+                  <div>
+                    <button
+                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <nav>
+                  <ul className="space-y-4">
+                    <li>
+                      <Link
+                        href="/"
+                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 "
+                      >
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/contact"
+                      >
+                        Contact us
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/genlink"
+                      >
+                        Create Payment Link
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/links"
+                      >
+                        Payment Links
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/qrcode"
+                      >
+                        My Qr Code
+                      </Link>
+                    </li>
+
+                    {
+                      status === "authenticated" ? <>
+                        <li>
+                          <button
+                            onClick={() => signOut()}
+                            className="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#002970] focus:shadow-outline focus:outline-none"
+                          >
+                            Sign Out
+                          </button>
+                        </li>
+                      </>
+                        : <>
+                          <li>
+                            <button
+                              onClick={() => signIn()}
+                              className="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#002970] focus:shadow-outline focus:outline-none"
+                            >
+                              Sign In
+                            </button>
+                          </li>
+                        </>
+                    }
+                  </ul>
+                </nav>
               </div>
             </div>
           )}
-        </Transition>
-      </nav>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default Navbar;
-
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  return {
-    props: {
-      session
-    }
-  }
-}

@@ -4,7 +4,7 @@ const HeaderLogo = ({text}) => {
     return (
         <div className="flex text-center w-full flex-col">
             <div className="flex text-center w-full flex-col">
-                <div className="text-4xl mb-4 font-semibold" >
+                <div className="text-2xl font-black" >
                     Upi<span className="text-[#00b9f5]">Pay</span>
                 </div>
                 <p className="text-xl font-medium">{text}</p>

@@ -14,7 +14,7 @@ const Home = () => {
         <title>UpiPay</title>
         <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
         <meta property="og:title" content="Upi Pay Payment Links" />
-        <meta property="og:description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Link" />
+        <meta property="og:description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
         <meta property="og:url" content="https://upipayy.vercel.app/" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
@@ -153,9 +153,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="text-gray-600 body-font text-center">
-        <div className="flex justify-center items-center sm:max-w-6xl gap-16 flex-col rounded-3xl mx-auto mt-0 py-20 text-center bg-[#f2fbff]">
+        <div className="flex justify-center items-center w-full sm:max-w-6xl gap-16 flex-col rounded-3xl mx-auto mt-0 py-20 text-center bg-[#f2fbff]">
           <div className="font-bold flex flex-col text-2xl sm:text-4xl text-center text-black ">
             No Setup Fees, No Maintenance Charges
             <span className="font-bold text-2xl sm:text-4xl text-center text-black ">

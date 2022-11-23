@@ -11,11 +11,11 @@ let contactpageSchema = yup.object().shape({
     message: yup
         .string()
         .min(5, "Message must be at least of 5 characters.")
-        .required("Please enter you Message"),
-    name: yup
+        .required("Please enter your Message"),
+    subject: yup
         .string()
-        .required("Please enter you name")
-        .min(4, "Name must be at least 4 characters"),
+        .required("Please enter your subject")
+        .min(4, "Subject must be at least 4 characters"),
 });
 
 export default contactpageSchema;

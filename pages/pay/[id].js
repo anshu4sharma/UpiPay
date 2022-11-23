@@ -1,15 +1,17 @@
 import React from "react";
 import QRCode from "react-qr-code";
+import HeaderLogo from "../../components/HeaderLogo";
 const Pay = ({ link }) => {
   const { upiId, amount, name, description } = link
   let upiLink = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR&tn=${description}`
   return <>
     <div className="flex flex-row mt-8  justify-center">
       <div
-        className="relative flex-col flex gap-4 sm:w-fit shadow-xl rounded-lg border sm:border-gray-100 p-8">
+        className="relative flex-col flex gap-4 sm:w-fit shadow-xl rounded-lg border sm:border-gray-100 p-8 ">
         <span
           className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
         ></span>
+        <HeaderLogo />
         <div className="flex justify-center">
           <QRCode
             value={upiLink}
@@ -55,26 +57,9 @@ const Pay = ({ link }) => {
 
 export default Pay;
 
-export async function getStaticPaths() {
-  const res = await fetch('https://anshu.up.railway.app/genlink/showall')
-  const links = await res.json()
-  const paths = links.map((items) => {
-    return {
-      params: { id: items.uid }
-    }
-  })
-
-  return {
-    paths,
-    fallback: 'blocking', // can also be true or 'blocking'
-  }
-}
-
-export async function getStaticProps({ params }) {
-
+export async function getServerSideProps({ params }) {
   const res = await fetch(`https://anshu.up.railway.app/genlink/uid/${params.id}`)
   const [link] = await res.json()
-
   return {
     props: { link },
   }
