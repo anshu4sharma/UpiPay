@@ -9,7 +9,7 @@ export default function Dashboard({ links }) {
         <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
         <meta property="og:title" content="Accept Payments using UpiPay Payment links" />
         <meta property="og:description" content="Accept Payments using UpiPay Payment links" />
-        <meta property="og:url" content="https://upipayy.vercel.app/links" />
+        <meta property="og:url" content="https://upipay.ml/links" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -79,7 +79,7 @@ export default function Dashboard({ links }) {
                             </p>
                           </td>
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <Link target={'_blank'} href={`https://upipayy.vercel.app/pay/${data.uid}`} className="text-gray-900 whitespace-no-wrap">
+                            <Link target={'_blank'} href={`https://upipay.ml/pay/${data.uid}`} className="text-gray-900 whitespace-no-wrap">
                               🔗
                             </Link>
                           </td>

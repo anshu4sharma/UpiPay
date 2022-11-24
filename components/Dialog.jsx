@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 const DialogBox = ({ closeModal, isOpen, linkuid }) => {
-    let link = `https://upipayy.vercel.app/pay/${linkuid}`
+    let link = `https://upipay.ml/pay/${linkuid}`
     const copyToClipboard = () => navigator.clipboard.writeText(link)
     return (
         <>

@@ -13,7 +13,7 @@ const Home = () => {
         <meta name="description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
         <meta property="og:title" content="Upi Pay Payment Links" />
         <meta property="og:description" content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links" />
-        <meta property="og:url" content="https://upipayy.vercel.app/" />
+        <meta property="og:url" content="https://upipay.ml/" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
