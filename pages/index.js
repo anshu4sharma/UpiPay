@@ -4,10 +4,8 @@ import banner from "../assets/banner.webp";
 import zerocharge from "../assets/zero.svg";
 import collectPayments from "../assets/collectPayments.webp";
 import Head from "next/head";
-import { signIn, useSession } from 'next-auth/react'
 import Link from "next/link";
 const Home = () => {
-  const { data: session } = useSession()
   return (
     <>
       <Head>
@@ -31,33 +29,21 @@ const Home = () => {
             <h1 className=" font-extrabold leading-10 sm:text-5xl text-3xl mb-4 text-[#00b9f5]">
               No Coding Required.
             </h1>
-            {
-              session ? <Link
-                className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
-                href={'/genlink'}
-              >
-                Get Payment Link
-              </Link> :
-                <button
-                  onClick={() => signIn()}
-                  className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
-                >
-                  Get Payment Link
-                </button>
-            }
-            <div className="flex leading-10  w-full md:justify-start justify-center items-end"></div>
-            <div className="flex lg:flex-row md:flex-col"></div>
+            <Link
+              className=" bg-[#002970] text-white cursor-pointer font-bold rounded-3xl	 inline-flex py-5 pl-12 pr-16 no-underline whitespace-no-wrap"
+              href={'/genlink'}
+            >
+              Get Payment Link
+            </Link>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 ">
             <Image
-              className="object-cover object-center rounded"
               alt="hero"
               src={banner}
             />
           </div>
         </div>
       </section>
-      {/*  Collect Online Payments end here */}
       <section className="text-gray-600 body-font text-center">
         <h1 className="font-bold text-4xl text-black leading-10 my-4">
           Collect Payments in 3 Easy Steps
@@ -65,7 +51,6 @@ const Home = () => {
         <div className="container mx-auto gap-16 sm:gap-32 flex px-10 py-8 md:flex-row flex-col items-center">
           <div className="lg:max-w-lg lg:w-full md:w-1/2">
             <Image
-              className="object-cover object-center rounded"
               alt="hero"
               src={collectPayments}
             />

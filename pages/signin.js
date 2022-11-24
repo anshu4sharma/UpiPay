@@ -1,6 +1,5 @@
 import { getProviders, signIn, getSession } from "next-auth/react"
 export default function SignIn({ providers }) {
-    console.log(providers);
     return (
         <div className="w-full mt-8 grid place-content-center">
             <h2 className="my-4 text-4xl tracking-tight font-extrabold text-center text-gray-900">Sign In</h2>
