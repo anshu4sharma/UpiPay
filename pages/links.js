@@ -13,7 +13,9 @@ export default function Dashboard() {
     const links = await res.json()
     return links
   }
-  const { data, error, isLoading } = useQuery(['links'], fetchLinks)
+  const { data, error, isLoading } = useQuery(['links'], fetchLinks, {
+    enabled: !!session?.user.email,
+  })
   if (error) {
     return <p>an error occured </p>
   }
