@@ -158,13 +158,13 @@ export default function Dashboard() {
               )}
               {data?.Links?.length > 0 && (
                 <div className="flex flex-col mx-4 sm:mx-0 sm:items-center justify-center my-4">
-                  <span className="text-sm text-gray-700 dark:text-gray-400">
+                  <span className="text-sm text-gray-700">
                     Showing
-                    <span className="font-semibold m-2  text-gray-900 dark:text-white">
+                    <span className="font-semibold m-2  text-gray-900 ">
                       {data?.Links?.length}
                     </span>
                     of
-                    <span className="font-semibold m-2 text-gray-900 dark:text-white">
+                    <span className="font-semibold m-2 text-gray-900">
                       {data?.totalLinks}
                     </span>
                     Links
