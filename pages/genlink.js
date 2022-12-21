@@ -75,7 +75,7 @@ const Genlink = () => {
           property="og:description"
           content="Create Payment Link with UpiPay Payment Links"
         />
-        <meta property="og:url" content="https://upipayy.vercel.app/genlink" />
+        <meta property="og:url" content="https://upipay.anshusharma.me/genlink" />
         <meta property="og:type" content="website" />
       </Head>
       <section className="text-gray-600 body-font relative">

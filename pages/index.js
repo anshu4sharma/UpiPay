@@ -21,7 +21,7 @@ const Home = () => {
           property="og:description"
           content="Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links"
         />
-        <meta property="og:url" content="https://upipayy.vercel.app/" />
+        <meta property="og:url" content="https://upipay.anshusharma.me/" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

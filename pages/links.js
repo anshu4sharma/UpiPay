@@ -42,7 +42,7 @@ export default function Dashboard() {
           property="og:description"
           content="Accept Payments using UpiPay Payment links"
         />
-        <meta property="og:url" content="https://upipayy.vercel.app/links" />
+        <meta property="og:url" content="https://upipay.anshusharma.me/links" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -127,7 +127,7 @@ export default function Dashboard() {
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <Link
                                 target={"_blank"}
-                                href={`https://upipayy.vercel.app/pay/${data.uid}`}
+                                href={`https://upipay.anshusharma.me/pay/${data.uid}`}
                                 className="text-gray-900 whitespace-no-wrap"
                               >
                                 🔗
