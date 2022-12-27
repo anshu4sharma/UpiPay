@@ -161,11 +161,11 @@ export default function Dashboard() {
                   aria-label="Page navigation example"
                   className="my-4 mx-4 block"
                 >
-                  <ul className="inline-flex -space-x-px">
+                  <ul className="inline-flex items-center -space-x-px">
                     <li>
                       <button
-                         onClick={() => setPage((old) => Math.max(old - 1, 1))}
-                         disabled={page === 1}
+                        onClick={() => setPage((old) => Math.max(old - 1, 1))}
+                        disabled={page === 1}
                         className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
                       >
                         Previous
@@ -176,11 +176,11 @@ export default function Dashboard() {
                         [...Array(Math.ceil(data?.totalLinks / 10))].map(
                           (_, index) => {
                             return (
-                              <li>
+                              <li key={index + 1}>
                                 <button
-                                  className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
-                                  disabled={page===index+1}
-                                  onClick={() => setPage(index+1)}
+                                  className={`px-3 py-2 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100 hover:text-gray-700 bg-white`}
+                                  disabled={page === index + 1}
+                                  onClick={() => setPage(index + 1)}
                                 >
                                   {index + 1}
                                 </button>
@@ -191,7 +191,7 @@ export default function Dashboard() {
                     </div>
                     <li>
                       <button
-                         onClick={() => {
+                        onClick={() => {
                           if (!isPreviousData) {
                             setPage((old) => old + 1);
                           }
