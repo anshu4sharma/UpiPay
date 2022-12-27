@@ -157,65 +157,53 @@ export default function Dashboard() {
                 </table>
               )}
               {data?.Links?.length > 0 && (
-                <div className="flex flex-col mx-4 sm:mx-0 sm:items-center justify-center my-4">
-                  <span className="text-sm text-gray-700">
-                    Showing
-                    <span className="font-semibold m-2  text-gray-900 ">
-                      {data?.Links?.length}
-                    </span>
-                    of
-                    <span className="font-semibold m-2 text-gray-900">
-                      {data?.totalLinks}
-                    </span>
-                    Links
-                  </span>
-                  <div className="inline-flex mt-2 gap-2 xs:mt-0">
-                    <button
-                      onClick={() => setPage((old) => Math.max(old - 1, 1))}
-                      disabled={page === 1}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 rounded-l hover:bg-blue-900 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        className="w-5 h-5 mr-2"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+                <nav
+                  aria-label="Page navigation example"
+                  className="my-4 mx-4 block"
+                >
+                  <ul className="inline-flex -space-x-px">
+                    <li>
+                      <button
+                         onClick={() => setPage((old) => Math.max(old - 1, 1))}
+                         disabled={page === 1}
+                        className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                      Prev
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (!isPreviousData) {
-                          setPage((old) => old + 1);
-                        }
-                      }}
-                      disabled={data.totalPages === page}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-800 rounded-l hover:bg-blue-900 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
-                    >
-                      Next
-                      <svg
-                        aria-hidden="true"
-                        className="w-5 h-5 ml-2"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+                        Previous
+                      </button>
+                    </li>
+                    <div className="flex gap-2 px-3">
+                      {data?.totalLinks &&
+                        [...Array(Math.ceil(data?.totalLinks / 10))].map(
+                          (_, index) => {
+                            return (
+                              <li>
+                                <button
+                                  className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
+                                  disabled={page===index+1}
+                                  onClick={() => setPage(index+1)}
+                                >
+                                  {index + 1}
+                                </button>
+                              </li>
+                            );
+                          }
+                        )}
+                    </div>
+                    <li>
+                      <button
+                         onClick={() => {
+                          if (!isPreviousData) {
+                            setPage((old) => old + 1);
+                          }
+                        }}
+                        disabled={data.totalPages === page}
+                        className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:text-blue-800"
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                        Next
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
               )}
             </div>
           </div>
