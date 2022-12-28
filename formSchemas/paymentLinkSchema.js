@@ -20,7 +20,7 @@ let signupSchema = yup.object().shape({
     .required("*Required")
     .min(1)
     .integer()
-    .max(100000, "Can't exceed max limit !"),
+    .max(100000, "Can't exceed max limit ₹100000"),
 });
 
 export default signupSchema;

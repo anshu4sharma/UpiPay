@@ -4,18 +4,18 @@ import Ilustration from "../assets/paymentlink.jpg";
 import { useFormik } from "formik";
 import paymentLinkSchema from "../formSchemas/paymentLinkSchema";
 import axios from "axios";
+import toast from "react-hot-toast";
 const Dialog = dynamic(() => import("../components/Dialog"), {
   ssr: false,
 });
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { useMutation } from "@tanstack/react-query";
 const Genlink = () => {
   const { data: session } = useSession({
     required: true,
   });
-  const [iserror, setIserror] = useState(false);
-  const [isloading, setIsloading] = useState(false);
   let [isOpen, setIsOpen] = useState(false);
   let [linkuid, setLinkuid] = useState("");
   function closeModal() {
@@ -31,34 +31,37 @@ const Genlink = () => {
       },
       validationSchema: paymentLinkSchema,
       onSubmit: () => {
-        submitForm();
+        submitForm.mutate();
       },
     });
-  const submitForm = async () => {
-    try {
-      setIsloading(true);
-      let data = await axios({
-        method: "post",
-        url: "https://anshu.up.railway.app/genlink",
-        headers: { "Content-Type": "application/json" },
-        data: {
-          ...values,
-          merchantId: session?.user?.email,
-        },
+  const submitForm = useMutation({
+    mutationFn: () => {
+      return axios.post("https://anshu.up.railway.app/genlink", {
+        ...values,
+        merchantId: session?.user?.email,
       });
-      if (data.status === 200) {
-        setIsOpen(true);
-        setLinkuid(data.data.uid);
-      }
-    } catch (error) {
-      console.log(error);
-      setIserror(true);
-    } finally {
-      setIsloading(false);
+    },
+    onMutate: () => {
+      toast.loading("Creating!", {
+        id: "loading",
+      });
+    },
+    onSuccess: (data) => {
+      setLinkuid(data.data.uid);
+      setIsOpen(true);
+      toast.success("Sucessfully created!", {
+        id: "loading",
+      });
+    },
+    onError: () => {
+      toast.error("An error occured try again !", {
+        id: "loading",
+      });
+    },
+    onSettled: () => {
       resetForm();
-    }
-  };
-
+    },
+  });
   return (
     <>
       <Head>
@@ -75,7 +78,10 @@ const Genlink = () => {
           property="og:description"
           content="Create Payment Link with UpiPay Payment Links"
         />
-        <meta property="og:url" content="https://upipay.anshusharma.me/genlink" />
+        <meta
+          property="og:url"
+          content="https://upipay.anshusharma.me/genlink"
+        />
         <meta property="og:type" content="website" />
       </Head>
       <section className="text-gray-600 body-font relative">
@@ -185,17 +191,12 @@ const Genlink = () => {
                   <p className="text-red-900">{errors.description}</p>
                 ) : null}
               </div>
-              {iserror && (
-                <p className="text-red-900">
-                  Oops there was an error ! Please try again
-                </p>
-              )}
               <button
                 type="submit"
                 className="disabled:cursor-progress disabled:bg-[#294f91] w-full text-center flex justify-center rounded-lg transition bg-[#002970] px-5 py-3 text-sm font-medium text-white"
-                disabled={isloading}
+                disabled={submitForm.isLoading}
               >
-                {isloading ? (
+                {submitForm.isLoading ? (
                   <>
                     <svg
                       className="w-5 h-5 mr-3 -ml-1 text-indigo-500 animate-spin"
@@ -209,7 +210,7 @@ const Genlink = () => {
                         cy="12"
                         r="10"
                         stroke="currentColor"
-                        stroke-width="4"
+                        strokeWidth="4"
                       ></circle>
                       <path
                         className="opacity-75"
