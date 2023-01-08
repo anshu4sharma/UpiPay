@@ -13,9 +13,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useMutation } from "@tanstack/react-query";
 const Genlink = () => {
-  const { data: session } = useSession({
-    required: true,
-  });
+  const { data: session } = useSession();
   let [isOpen, setIsOpen] = useState(false);
   let [linkuid, setLinkuid] = useState("");
   function closeModal() {

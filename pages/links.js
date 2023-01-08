@@ -5,9 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 export default function Dashboard() {
   const [page, setPage] = useState(1);
-  const { data: session } = useSession({
-    required: true,
-  });
+  const { data: session } = useSession();
   const fetchLinks = async () => {
     const res = await fetch(
       `https://anshu.up.railway.app/genlink/all/${session?.user.email}?page=${page}`
