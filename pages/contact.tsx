@@ -4,7 +4,36 @@ import contactPageSchema from "../formSchemas/contactpageSchema";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Head from "next/head";
+import { useMutation } from "@tanstack/react-query";
 const Contact = () => {
+  const to: string = "anshusharma6327@gmail.com";
+  const submitForm = useMutation({
+    mutationFn: () => {
+      return axios.post("https://nodemailer-gmail-cze6.vercel.app/mail", {
+        subject: values.subject,
+        to: to,
+        htmlContent: `<h2>From : ${values.email}</h2> <br/> ${values.message} `,
+      });
+    },
+    onMutate: () => {
+      toast.loading("sending!", {
+        id: "loading",
+      });
+    },
+    onSuccess: () => {
+      toast.success("Sucessfully sent!", {
+        id: "loading",
+      });
+    },
+    onError: () => {
+      toast.error("An error occured try again !", {
+        id: "loading",
+      });
+    },
+    onSettled: () => {
+      resetForm();
+    },
+  });
   const { handleSubmit, values, handleChange, touched, errors, resetForm } =
     useFormik({
       initialValues: {
@@ -14,33 +43,10 @@ const Contact = () => {
       },
       validationSchema: contactPageSchema,
       onSubmit: () => {
-        let callback = sendMessage();
-        toast.promise(callback, {
-          loading: "Sending!",
-          error: "error occurs in data",
-          success: "Successfully sent !",
-        });
+        submitForm.mutate();
       },
     });
-  const sendMessage = async () => {
-    const to = "anshusharma6327@gmail.com";
-    try {
-      await axios({
-        method: "post",
-        url: "https://nodemailer-gmail-cze6.vercel.app/mail",
-        headers: { "Content-Type": "application/json" },
-        data: {
-          subject: values.subject,
-          to: to,
-          htmlContent: `<h2>From : ${values.email}</h2> <br/> ${values.message} `,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      resetForm();
-    }
-  };
+
   return (
     <>
       <Head>
@@ -105,7 +111,7 @@ const Contact = () => {
                 name="message"
                 onChange={handleChange}
                 value={values.message}
-                rows="6"
+                rows={6}
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
                 placeholder="Leave a comment..."
               ></textarea>

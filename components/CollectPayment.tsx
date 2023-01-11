@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import collectPayments from "../assets/collectPayments.webp";
 const CollectPayment = () => {
   return (
     <section className="text-gray-600 body-font text-center">
@@ -8,7 +7,7 @@ const CollectPayment = () => {
         </h1>
         <div className="container mx-auto gap-16 sm:gap-32 flex px-10 py-8 md:flex-row flex-col items-center">
           <div className="lg:max-w-lg lg:w-full md:w-1/2">
-            <Image alt="hero" src={collectPayments} height="500" />
+            <Image alt="hero" src={'/collectPayments.webp'} width={"400"} height="500" />
           </div>
           <div className="lg:flex-grow flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <div className="flex relative pb-12">

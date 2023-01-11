@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import banner from "../assets/banner.webp";
 const Hero = () => {
   return (
     <section className="text-gray-600 body-font">
@@ -23,7 +22,7 @@ const Hero = () => {
           </Link>
         </div>
         <div className="lg:max-w-lg lg:w-full md:w-1/2 ">
-          <Image alt="hero" src={banner} height="500" />
+          <Image alt="hero" src={'/banner.webp'} width={"400"} height="500" />
         </div>
       </div>
     </section>

@@ -1,9 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-const DialogBox = ({ closeModal, isOpen, linkuid }) => {
+type TDialogBox = {
+  closeModal(): void,
+  linkuid: string,
+  isOpen: boolean
+}
+const DialogBox = ({ closeModal, isOpen, linkuid }: TDialogBox) => {
   let link = `https://upipay.anshusharma.me/pay/${linkuid}`;
-  const copyToClipboard = () => {
+  const copyToClipboard = (): void => {
     navigator.clipboard.writeText(link);
     toast.success("Copied Successfully !");
   };

@@ -2,10 +2,11 @@ import React from "react";
 import Head from "next/head";
 import Hero from "../components/Hero";
 import CollectPayment from "../components/CollectPayment";
-// //  it will disable javascript for this page only in production
+//? it will disable javascript for this page only in production
 export const config = {
   unstable_runtimeJS: false,
 };
+
 const Home = () => {
   return (
     <>

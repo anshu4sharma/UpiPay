@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Ilustration from "../assets/paymentlink.jpg";
 import { useFormik } from "formik";
 import paymentLinkSchema from "../formSchemas/paymentLinkSchema";
 import axios from "axios";
@@ -14,9 +13,9 @@ import dynamic from "next/dynamic";
 import { useMutation } from "@tanstack/react-query";
 const Genlink = () => {
   const { data: session } = useSession();
-  let [isOpen, setIsOpen] = useState(false);
-  let [linkuid, setLinkuid] = useState("");
-  function closeModal() {
+  let [isOpen, setIsOpen] = useState<boolean>(false);
+  let [linkuid, setLinkuid] = useState<string>("");
+  function closeModal(): void {
     setIsOpen(false);
   }
   const { handleSubmit, values, handleChange, touched, errors, resetForm } =
@@ -87,7 +86,9 @@ const Genlink = () => {
         <div className="container px-5 py-8 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="md:w-1/2 rounded-lg sm:justify-center overflow-hidden sm:mr-10  flex  relative">
             <Image
-              src={Ilustration}
+              src={"/paymentlink.jpg"}
+              width={"400"}
+              height={"500"}
               className="w-full object-contain sm:w-[550px]"
               alt="img"
             />
@@ -143,10 +144,7 @@ const Genlink = () => {
                   >
                     Email
                   </label>
-                  <p
-                    className="py-3 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out"
-                    disabled
-                  >
+                  <p className="py-3 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 px-2 leading-4 transition-colors duration-200 ease-in-out">
                     {session?.user?.email}
                   </p>
                 </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { RWebShare } from "react-web-share";
 export default function Dashboard() {
   const [page, setPage] = useState(1);
   const { data: session } = useSession();
@@ -13,16 +14,24 @@ export default function Dashboard() {
     const links = await res.json();
     return links;
   };
-  const { data, error, isLoading, isPreviousData, isFetching } = useQuery(
-    ["links", page],
-    fetchLinks,
-    {
-      enabled: !!session?.user.email,
-      keepPreviousData: true,
-    }
-  );
+  const {
+    data,
+    error,
+    isLoading,
+    isPreviousData,
+    isFetching,
+  }: {
+    data: FetchedLinks;
+    error: string;
+    isLoading: boolean;
+    isPreviousData: boolean;
+    isFetching: boolean;
+  } = useQuery(["links", page], fetchLinks, {
+    enabled: !!session?.user.email,
+    keepPreviousData: true,
+  });
   if (error) {
-    return <p>an error occured </p>;
+    return <p>An error occured please refresh the page ! </p>;
   }
   return (
     <>
@@ -91,6 +100,9 @@ export default function Dashboard() {
                         Link
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Share
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Purpose of Payment
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -125,11 +137,22 @@ export default function Dashboard() {
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <Link
                                 target={"_blank"}
-                                href={`https://upipay.anshusharma.me/pay/${data?.uid}`}
+                                href={`https://upipay.anshusharma.me/pay/${data.uid}`}
                                 className="text-gray-900 whitespace-no-wrap"
                               >
-                                🔗
+                                Open 🔗
                               </Link>
+                            </td>
+                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                              <RWebShare
+                                data={{
+                                  text: "Collect Online Payments from anywhere in India. Create Payment Link Via Upi Pay Payment Links",
+                                  url: `https://upipay.anshusharma.me/pay/${data.uid}`,
+                                  title: "UpiPay",
+                                }}
+                              >
+                                <button>Share 🔗</button>
+                              </RWebShare>
                             </td>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <p className="text-gray-900 whitespace-no-wrap">
@@ -172,12 +195,12 @@ export default function Dashboard() {
                       <button
                         disabled
                         type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
                       >
                         <svg
                           aria-hidden="true"
                           role="status"
-                          class="inline mr-3 w-4 h-4 text-white animate-spin"
+                          className="inline mr-3 w-4 h-4 text-white animate-spin"
                           viewBox="0 0 100 101"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
