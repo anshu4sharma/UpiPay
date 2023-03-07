@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { RWebShare } from "react-web-share";
+import Script from "next/script";
 export default function Dashboard() {
   const [page, setPage] = useState(1);
   const { data: session } = useSession();
@@ -52,7 +53,17 @@ export default function Dashboard() {
         <meta property="og:url" content="https://upipay.anshusharma.me/links" />
         <meta property="og:type" content="website" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4780451799247980"
+              crossOrigin="anonymous" />
+            <ins className="adsbygoogle"
+              style={{ display: "block", textAlign: "center" }}
+              data-ad-layout="in-article"
+              data-ad-format="fluid"
+              data-ad-client="ca-pub-4780451799247980"
+              data-ad-slot="7454156444"></ins>
+            <Script id="postads" >
+              (adsbygoogle = window.adsbygoogle || []).push({ });
+            </Script>
       <div className="bg-white p-4 sm:px-16 rounded-md w-full">
         <div className=" flex items-center justify-between pb-6">
           <div>
