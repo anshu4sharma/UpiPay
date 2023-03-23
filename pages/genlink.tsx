@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useMutation } from "@tanstack/react-query";
+import Script from "next/script";
 const Genlink = () => {
   const { data: session } = useSession();
   let [isOpen, setIsOpen] = useState<boolean>(false);
@@ -61,6 +62,22 @@ const Genlink = () => {
   });
   return (
     <>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4780451799247980"
+        crossOrigin="anonymous"
+      ></Script>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", textAlign: "center" }}
+        data-ad-client="ca-pub-4780451799247980"
+        data-ad-slot="6357525171"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      <Script id="category-ads">
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </Script>
       <Head>
         <title>Create Payment Link</title>
         <meta
