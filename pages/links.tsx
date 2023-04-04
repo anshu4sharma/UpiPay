@@ -64,7 +64,7 @@ export default function Dashboard() {
             <Script id="postads" >
               (adsbygoogle = window.adsbygoogle || []).push({ });
             </Script>
-      <div className="bg-white p-4 sm:px-16 rounded-md w-full">
+      <div className="bg-white p-4 sm:px-16 rounded-md w-full py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className=" flex items-center justify-between pb-6">
           <div>
             <h2 className="text-gray-600 font-semibold">All Payments Links</h2>
