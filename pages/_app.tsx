@@ -9,6 +9,8 @@ import { useProgressStore } from "../store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
+import { Plus_Jakarta_Sans } from "@next/font/google";
+const inter = Plus_Jakarta_Sans({ subsets: ["latin"] });
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
   const setIsAnimating = useProgressStore((state) => state.setIsAnimating);
@@ -35,10 +37,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
           <Progress isAnimating={isAnimating} />
+          <main className={inter.className}>
           <Navbar />
           <Toaster />
           <Component {...pageProps} />
           <Footer />
+          </main>
         </SessionProvider>
       </QueryClientProvider>
     </>

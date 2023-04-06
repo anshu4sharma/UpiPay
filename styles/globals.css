@@ -2,8 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: "Indie Flower", cursive;
-  font-family: "Poppins", sans-serif;
-  font-family: "Ubuntu", sans-serif;
-}
