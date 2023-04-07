@@ -13,14 +13,17 @@ const Pay = ({ link }: { link: Link }) => {
   const handleCapture = async () => {
     const toastId = toast.loading('Downloading...');
     try {
-      const canvas = await html2canvas(captureRef.current)
-      canvas.toBlob((blob) => {
-        saveAs(blob, "image.png");
-        toast.success('Successfully saved ', {
-          id: toastId,
-        });
+      const canvas = await html2canvas(captureRef.current);
+      const url = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.download = "image.png";
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success('Successfully saved ', {
+        id: toastId,
       });
-
     } catch (error) {
       toast.error("An error occured!", {
         id: toastId,
