@@ -1,7 +1,7 @@
 import Image from 'next/image'
 const CollectPayment = () => {
   return (
-    <section className="text-gray-600 body-font text-center py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <section className="text-gray-600 body-font text-center py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-14">
       <h1 className="font-bold text-4xl text-black leading-10 my-4">
         Collect Payments in 3 Easy Steps
       </h1>

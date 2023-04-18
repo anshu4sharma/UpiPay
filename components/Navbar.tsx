@@ -2,7 +2,7 @@ import Link from "next/link";
 import HeaderLogo from "./HeaderLogo";
 function Navbar() {
   return (
-    <div className=" py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className=" py-5 mx-auto sm:max-w-xl md:max-w-full md:px-14">
       <header className="text-gray-600 body-font">
         <div className="container mx-auto flex flex-wrap sm:p-5 flex-col md:flex-row items-center">
           <div className="hidden sm:block m-0 p-0">
