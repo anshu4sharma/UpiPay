@@ -7,7 +7,7 @@ type TDialogBox = {
   isOpen: boolean
 }
 const DialogBox = ({ closeModal, isOpen, linkuid }: TDialogBox) => {
-  let link = `https://upipay.anshusharma.me/pay/${linkuid}`;
+  let link = `${process.env.NEXTAUTH_URL}/pay/${linkuid}`;
   const copyToClipboard = (): void => {
     navigator.clipboard.writeText(link);
     toast.success("Copied Successfully !");
